@@ -1,5 +1,5 @@
 {
-  "name": "pixel-open/magento-cloudflare-turnstile",
+  "name": "pixelopen/magento-cloudflare-turnstile",
   "description": "Protect your store from spam messages and spam user accounts with Cloudflare Turnstile",
   "require": {
     "magento/module-checkout":"*",

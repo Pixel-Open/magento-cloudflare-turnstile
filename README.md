@@ -22,7 +22,7 @@
 ## Installation
 
 ```
-composer require pixel-open/magento-cloudflare-turnstile
+composer require pixelopen/magento-cloudflare-turnstile
 ```
 
 ## Configuration
