@@ -14,8 +14,6 @@
 - Reset password
 - Review
 
-![Cloudflare Turnstile](screenshot.png)
-
 ## Requirements
 
 - Magento >= 2.4.4

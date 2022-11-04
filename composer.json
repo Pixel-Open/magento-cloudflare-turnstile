@@ -2,13 +2,15 @@
   "name": "pixelopen/magento-cloudflare-turnstile",
   "description": "Protect your store from spam messages and spam user accounts with Cloudflare Turnstile",
   "require": {
-    "magento/module-checkout":"*",
-    "magento/module-contact":"*",
-    "magento/module-customer":"*",
+    "magento/module-checkout": "*",
+    "magento/module-config": "*",
+    "magento/module-contact": "*",
+    "magento/module-customer": "*",
+    "magento/module-review": "*",
     "magento/framework": "*"
   },
   "type": "magento2-module",
-  "version": "100.1.0",
+  "version": "100.1.1",
   "autoload": {
     "files": [
       "registration.php"
