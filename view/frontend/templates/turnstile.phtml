@@ -1,0 +1,19 @@
+<?php /** @var \PixelOpen\CloudflareTurnstile\Block\Turnstile $block */ ?>
+<div id="<?= $block->getId() ?>" class="cloudflare-turnstile" data-bind="scope:'cloudflare-turnstile'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+{
+    "#<?= $block->getId() ?>": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "cloudflare-turnstile": {
+                    "component": "PixelOpen_CloudflareTurnstile/js/view/turnstile",
+                    "action": "<?= $block->getAction() ?>",
+                    "configSource": "turnstileConfig"
+                }
+            }
+        }
+    }
+}
+</script>

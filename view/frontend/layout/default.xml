@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright (C) 2022 Pixel Développement
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="PixelOpen_CloudflareTurnstile::css/turnstile.css"/>
+    </head>
+    <body>
+        <referenceContainer name="before.body.end">
+            <block class="PixelOpen\CloudflareTurnstile\Block\Turnstile\Config" template="PixelOpen_CloudflareTurnstile::turnstile/config.phtml" ifconfig="pixel_open/cloudflare_turnstile/enabled" />
+        </referenceContainer>
+        <referenceBlock name="authentication-popup">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="authenticationPopup" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="cloudflare-turnstile" xsi:type="array">
+                                    <item name="component" xsi:type="string">PixelOpen_CloudflareTurnstile/js/view/turnstile</item>
+                                    <item name="displayArea" xsi:type="string">additional-login-form-fields</item>
+                                    <item name="action" xsi:type="string">login-ajax</item>
+                                    <item name="configSource" xsi:type="string">turnstileConfig</item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

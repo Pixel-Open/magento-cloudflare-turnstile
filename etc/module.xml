@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright (C) 2022 Pixel Développement
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="PixelOpen_CloudflareTurnstile">
+        <sequence>
+            <module name="Magento_Checkout"/>
+            <module name="Magento_Contact"/>
+            <module name="Magento_Customer"/>
+        </sequence>
+    </module>
+</config>

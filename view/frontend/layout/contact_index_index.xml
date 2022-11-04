@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright (C) 2022 Pixel Développement
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="form.additional.info">
+            <block name="pixel.open.cloudflare.turnstile.contact" class="PixelOpen\CloudflareTurnstile\Block\Turnstile" ifconfig="pixel_open/cloudflare_turnstile/enabled">
+                <action method="setAction">
+                    <argument name="action" xsi:type="string">contact</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,9 @@
+<?php /** @var \PixelOpen\CloudflareTurnstile\Block\Turnstile\Config $block */ ?>
+<?php /** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */ ?>
+<?php
+$serializedTurnstileConfig = $block->getSerializedTurnstileConfig();
+$scriptString = <<<script
+        window.turnstileConfig = {$serializedTurnstileConfig};
+script;
+?>
+<?= $secureRenderer->renderTag('script', [], $scriptString, false) ?>
