@@ -14,7 +14,7 @@
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">
-                            <resource id="Pixel_CloudflareTurnstile::settings" title="Cloudflare Turnstile" translate="title" />
+                            <resource id="PixelOpen_CloudflareTurnstile::settings" title="Cloudflare Turnstile" translate="title" />
                         </resource>
                     </resource>
                 </resource>

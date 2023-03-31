@@ -1,3 +1,7 @@
+## 100.1.2
+
+- Config path updated
+
 ## 100.1.1
 
 - Fix review data persistor
