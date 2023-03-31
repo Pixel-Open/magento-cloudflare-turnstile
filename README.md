@@ -1,7 +1,7 @@
 # Magento Cloudflare Turnstile
 
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-green)](https://php.net/)
-[![Minimum Prestashop Version](https://img.shields.io/badge/magento-%3E%3D%202.4.4-green)](https://www.prestashop.com)
+[![Minimum Magento Version](https://img.shields.io/badge/magento-%3E%3D%202.4.4-green)](https://business.adobe.com/products/magento/magento-commerce.html)
 [![GitHub release](https://img.shields.io/github/v/release/Pixel-Open/magento-cloudflare-turnstile)](https://github.com/Pixel-Open/magento-cloudflare-turnstile/releases)
 
 ## Presentation
