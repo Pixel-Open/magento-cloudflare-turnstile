@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2022 Pixel Développement
+ * Copyright (C) 2023 Pixel Développement
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -28,6 +28,7 @@ use Magento\Framework\Phrase;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\Session\Generic;
 use Magento\Review\Controller\Product\Post as ReviewPost;
+use PixelOpen\CloudflareTurnstile\Helper\Config;
 use PixelOpen\CloudflareTurnstile\Model\Config\Source\Forms;
 use PixelOpen\CloudflareTurnstile\Model\Validator;
 
@@ -47,6 +48,8 @@ class Validate implements ObserverInterface
 
     protected Json $json;
 
+    protected Config $config;
+
     /**
      * @param ManagerInterface       $messageManager
      * @param Response               $response
@@ -55,6 +58,7 @@ class Validate implements ObserverInterface
      * @param Generic                $reviewSession
      * @param Validator              $validator
      * @param Json                   $json
+     * @param Config                 $config
      */
     public function __construct(
         ManagerInterface $messageManager,
@@ -63,7 +67,8 @@ class Validate implements ObserverInterface
         CustomerSession $customerSession,
         Generic $reviewSession,
         Validator $validator,
-        Json $json
+        Json $json,
+        Config $config
     ) {
         $this->messageManager  = $messageManager;
         $this->response        = $response;
@@ -72,6 +77,7 @@ class Validate implements ObserverInterface
         $this->reviewSession   = $reviewSession;
         $this->validator       = $validator;
         $this->json            = $json;
+        $this->config          = $config;
     }
 
     /**
@@ -130,6 +136,9 @@ class Validate implements ObserverInterface
      */
     public function canValidate(Request $request, ActionInterface $action): bool
     {
+        if (!$this->config->isEnabled()) {
+            return false;
+        }
         if (!$request->isPost()) {
             return false;
         }

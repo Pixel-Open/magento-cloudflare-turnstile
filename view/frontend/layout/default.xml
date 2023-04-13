@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright (C) 2022 Pixel Développement
+ * Copyright (C) 2023 Pixel Développement
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,7 +13,7 @@
     </head>
     <body>
         <referenceContainer name="before.body.end">
-            <block class="PixelOpen\CloudflareTurnstile\Block\Turnstile\Config" template="PixelOpen_CloudflareTurnstile::turnstile/config.phtml" ifconfig="pixel_open/cloudflare_turnstile/enabled" />
+            <block class="PixelOpen\CloudflareTurnstile\Block\Turnstile\Config" template="PixelOpen_CloudflareTurnstile::turnstile/config.phtml" ifconfig="pixel_open_cloudflare_turnstile/settings/enabled" />
         </referenceContainer>
         <referenceBlock name="authentication-popup">
             <arguments>

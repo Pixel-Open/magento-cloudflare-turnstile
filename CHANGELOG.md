@@ -1,3 +1,9 @@
+## 100.1.2
+
+- Config path updated
+- CSP Whitelist added
+- Fix form validator when Turnstile is disabled
+
 ## 100.1.1
 
 - Fix review data persistor

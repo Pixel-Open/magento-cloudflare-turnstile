@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2022 Pixel Développement
+ * Copyright (C) 2023 Pixel Développement
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,11 +14,11 @@ use Magento\Framework\App\Helper\AbstractHelper;
 
 class Config extends AbstractHelper
 {
-    public const TURNSTILE_CONFIG_PATH_ENABLED = 'pixel_open/cloudflare_turnstile/enabled';
-    public const TURNSTILE_CONFIG_PATH_SECRET_KEY = 'pixel_open/cloudflare_turnstile/secret_key';
-    public const TURNSTILE_CONFIG_PATH_SITEKEY = 'pixel_open/cloudflare_turnstile/sitekey';
-    public const TURNSTILE_CONFIG_PATH_THEME = 'pixel_open/cloudflare_turnstile/theme';
-    public const TURNSTILE_CONFIG_PATH_FORMS = 'pixel_open/cloudflare_turnstile/forms';
+    public const TURNSTILE_CONFIG_PATH_ENABLED = 'pixel_open_cloudflare_turnstile/settings/enabled';
+    public const TURNSTILE_CONFIG_PATH_SECRET_KEY = 'pixel_open_cloudflare_turnstile/settings/secret_key';
+    public const TURNSTILE_CONFIG_PATH_SITEKEY = 'pixel_open_cloudflare_turnstile/settings/sitekey';
+    public const TURNSTILE_CONFIG_PATH_THEME = 'pixel_open_cloudflare_turnstile/settings/theme';
+    public const TURNSTILE_CONFIG_PATH_FORMS = 'pixel_open_cloudflare_turnstile/settings/forms';
 
     /**
      * Is Turnstile enabled
