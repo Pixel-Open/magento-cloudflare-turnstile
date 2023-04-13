@@ -2,6 +2,7 @@
 
 - Config path updated
 - CSP Whitelist added
+- Fix form validator when Turnstile is disabled
 
 ## 100.1.1
 
