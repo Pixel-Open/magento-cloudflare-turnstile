@@ -1,3 +1,7 @@
+## 100.1.3
+
+- CSP Whitelist added
+
 ## 100.1.2
 
 - Config path updated

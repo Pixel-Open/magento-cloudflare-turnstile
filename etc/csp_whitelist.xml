@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright (C) 2023 Pixel Développement
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="frame-src">
+            <values>
+                <value id="cloudflare_turnstile" type="host">challenges.cloudflare.com</value>
+            </values>
+        </policy>
+        <policy id="script-src">
+            <values>
+                <value id="cloudflare_turnstile" type="host">challenges.cloudflare.com</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>
