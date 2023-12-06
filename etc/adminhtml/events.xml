@@ -9,6 +9,6 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
     <event name="controller_action_predispatch">
-        <observer name="cloudflare_turnstile_frontend_server_validation" instance="PixelOpen\CloudflareTurnstile\Observer\Validate\Frontend" />
+        <observer name="cloudflare_turnstile_admin_server_validation" instance="PixelOpen\CloudflareTurnstile\Observer\Validate\Admin" />
     </event>
 </config>

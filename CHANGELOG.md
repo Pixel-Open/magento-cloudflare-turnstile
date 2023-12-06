@@ -1,3 +1,8 @@
+## 100.2.0
+
+- Admin login and reset password form validation
+- Turnstile added on guest checkout login form
+
 ## 100.1.2
 
 - Config path updated

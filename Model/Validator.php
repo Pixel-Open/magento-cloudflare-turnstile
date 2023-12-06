@@ -40,22 +40,31 @@ class Validator
     }
 
     /**
-     * Test if form is enabled
+     * Test if frontend form is enabled
      *
      * @param string $action
-     *
      * @return bool
      */
-    public function isFormEnabled(string $action): bool
+    public function isFrontendFormEnabled(string $action): bool
     {
-        return in_array($action, $this->config->getForms());
+        return in_array($action, $this->config->getFrontendForms());
+    }
+
+    /**
+     * Test if admin form is enabled
+     *
+     * @param string $action
+     * @return bool
+     */
+    public function isAdminFormEnabled(string $action): bool
+    {
+        return in_array($action, $this->config->getAdminForms());
     }
 
     /**
      * Test if response is valid
      *
      * @param string|null $response
-     *
      * @return bool
      */
     public function isValid(?string $response): bool
@@ -115,7 +124,6 @@ class Validator
      * Retrieve error message from error code
      *
      * @param string $code
-     *
      * @return string
      */
     protected static function getErrorMessage(string $code): string

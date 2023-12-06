@@ -12,8 +12,11 @@ namespace PixelOpen\CloudflareTurnstile\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-abstract class Forms implements OptionSourceInterface
+class Size implements OptionSourceInterface
 {
+    public const SIZE_NORMAL = 'normal';
+    public const SIZE_COMPACT = 'compact';
+
     /**
      * Get options as array
      *
@@ -38,5 +41,8 @@ abstract class Forms implements OptionSourceInterface
      *
      * @return string[]
      */
-    abstract public function toArray(): array;
+    public function toArray(): array
+    {
+        return [self::SIZE_NORMAL, self::SIZE_COMPACT];
+    }
 }

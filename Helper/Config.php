@@ -15,10 +15,17 @@ use Magento\Framework\App\Helper\AbstractHelper;
 class Config extends AbstractHelper
 {
     public const TURNSTILE_CONFIG_PATH_ENABLED = 'pixel_open_cloudflare_turnstile/settings/enabled';
+
     public const TURNSTILE_CONFIG_PATH_SECRET_KEY = 'pixel_open_cloudflare_turnstile/settings/secret_key';
     public const TURNSTILE_CONFIG_PATH_SITEKEY = 'pixel_open_cloudflare_turnstile/settings/sitekey';
-    public const TURNSTILE_CONFIG_PATH_THEME = 'pixel_open_cloudflare_turnstile/settings/theme';
-    public const TURNSTILE_CONFIG_PATH_FORMS = 'pixel_open_cloudflare_turnstile/settings/forms';
+
+    public const TURNSTILE_CONFIG_PATH_FRONTEND_THEME = 'pixel_open_cloudflare_turnstile/frontend/theme';
+    public const TURNSTILE_CONFIG_PATH_FRONTEND_SIZE = 'pixel_open_cloudflare_turnstile/frontend/size';
+    public const TURNSTILE_CONFIG_PATH_FRONTEND_FORMS = 'pixel_open_cloudflare_turnstile/frontend/forms';
+
+    public const TURNSTILE_CONFIG_PATH_ADMINHTML_THEME = 'pixel_open_cloudflare_turnstile/adminhtml/theme';
+    public const TURNSTILE_CONFIG_PATH_ADMINHTML_SIZE = 'pixel_open_cloudflare_turnstile/adminhtml/size';
+    public const TURNSTILE_CONFIG_PATH_ADMINHTML_FORMS = 'pixel_open_cloudflare_turnstile/adminhtml/forms';
 
     /**
      * Is Turnstile enabled
@@ -51,23 +58,65 @@ class Config extends AbstractHelper
     }
 
     /**
-     * Retrieve theme
+     * Retrieve frontend theme
      *
      * @return string
      */
-    public function getTheme(): string
+    public function getFrontendTheme(): string
     {
-        return (string)$this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_THEME);
+        return (string)$this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_FRONTEND_THEME);
     }
 
     /**
-     * Retrieve enabled forms
+     * Retrieve admin theme
+     *
+     * @return string
+     */
+    public function getAdminTheme(): string
+    {
+        return (string)$this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_ADMINHTML_THEME);
+    }
+
+    /**
+     * Retrieve frontend size
+     *
+     * @return string
+     */
+    public function getFrontendSize(): string
+    {
+        return (string)$this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_FRONTEND_SIZE);
+    }
+
+    /**
+     * Retrieve admin size
+     *
+     * @return string
+     */
+    public function getAdminSize(): string
+    {
+        return (string)$this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_ADMINHTML_SIZE);
+    }
+
+    /**
+     * Retrieve enabled frontend forms
      *
      * @return string[]
      */
-    public function getForms(): array
+    public function getFrontendForms(): array
     {
-        $forms = $this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_FORMS);
+        $forms = $this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_FRONTEND_FORMS);
+
+        return $forms ? array_filter(explode(',', $forms)) : [];
+    }
+
+    /**
+     * Retrieve enabled admin forms
+     *
+     * @return string[]
+     */
+    public function getAdminForms(): array
+    {
+        $forms = $this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_ADMINHTML_FORMS);
 
         return $forms ? array_filter(explode(',', $forms)) : [];
     }

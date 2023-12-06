@@ -1,0 +1,22 @@
+<?php /** @var \PixelOpen\CloudflareTurnstile\Block\Turnstile $block */ ?>
+<?php /** @var \Magento\Framework\Escaper $escaper */ ?>
+<div id="<?= $escaper->escapeHtmlAttr($block->getId()) ?>" class="cloudflare-turnstile" data-bind="scope:'cloudflare-turnstile'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+{
+    "#<?= $escaper->escapeHtmlAttr($block->getId()) ?>": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "cloudflare-turnstile": {
+                    "component": "PixelOpen_CloudflareTurnstile/js/view/turnstile",
+                    "action": "<?= $escaper->escapeJs($block->getAction()) ?>",
+                    "size": "<?= $escaper->escapeJs($block->getSize()) ?>",
+                    "theme": "<?= $escaper->escapeJs($block->getTheme()) ?>",
+                    "configSource": "turnstileConfig"
+                }
+            }
+        }
+    }
+}
+</script>

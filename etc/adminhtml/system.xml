@@ -11,7 +11,7 @@
     <system>
         <section id="pixel_open_cloudflare_turnstile" translate="label" type="text" sortOrder="900" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Cloudflare Turnstile</label>
-            <tab>customer</tab>
+            <tab>service</tab>
             <resource>PixelOpen_CloudflareTurnstile::settings</resource>
             <group id="settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Settings</label>
@@ -27,13 +27,35 @@
                     <label>Secret key</label>
                     <validate>required-entry</validate>
                 </field>
-                <field id="theme" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+            </group>
+            <group id="frontend" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Storefront</label>
+                <field id="theme" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Theme</label>
                     <source_model>PixelOpen\CloudflareTurnstile\Model\Config\Source\Theme</source_model>
                 </field>
-                <field id="forms" translate="label" type="multiselect" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="size" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Size</label>
+                    <source_model>PixelOpen\CloudflareTurnstile\Model\Config\Source\Size</source_model>
+                </field>
+                <field id="forms" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Forms to validate</label>
-                    <source_model>PixelOpen\CloudflareTurnstile\Model\Config\Source\Forms</source_model>
+                    <source_model>PixelOpen\CloudflareTurnstile\Model\Config\Source\Forms\Frontend</source_model>
+                </field>
+            </group>
+            <group id="adminhtml" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Admin Panel</label>
+                <field id="theme" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Theme</label>
+                    <source_model>PixelOpen\CloudflareTurnstile\Model\Config\Source\Theme</source_model>
+                </field>
+                <field id="size" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Size</label>
+                    <source_model>PixelOpen\CloudflareTurnstile\Model\Config\Source\Size</source_model>
+                </field>
+                <field id="forms" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Forms to validate</label>
+                    <source_model>PixelOpen\CloudflareTurnstile\Model\Config\Source\Forms\Adminhtml</source_model>
                 </field>
             </group>
         </section>

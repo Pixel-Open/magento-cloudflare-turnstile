@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright (C) 2023 Pixel Développement
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="PixelOpen_CloudflareTurnstile::css/turnstile.css"/>
+    </head>
+    <body>
+        <referenceContainer name="form.additional.info">
+            <block name="pixel.open.cloudflare.turnstile.admin.login" class="PixelOpen\CloudflareTurnstile\Block\Turnstile" cacheable="false" ifconfig="pixel_open_cloudflare_turnstile/settings/enabled">
+                <action method="setAction">
+                    <argument name="action" xsi:type="string">login</argument>
+                </action>
+            </block>
+            <block class="PixelOpen\CloudflareTurnstile\Block\Turnstile\Config" template="PixelOpen_CloudflareTurnstile::turnstile/config.phtml" cacheable="false" ifconfig="pixel_open_cloudflare_turnstile/settings/enabled" />
+        </referenceContainer>
+    </body>
+</page>

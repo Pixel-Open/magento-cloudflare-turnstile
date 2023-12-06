@@ -8,71 +8,30 @@
 /*global define*/
 define(
     [
-        'ko',
-        'jquery',
-        'uiComponent',
-        'Magento_Customer/js/customer-data',
-        'cfTurnstile',
-        'mage/translate'
+        'PixelOpen_CloudflareTurnstile/js/view/Component',
+        'Magento_Customer/js/customer-data'
     ],
     function (
-        ko,
-        $,
         Component,
         customerData
     ) {
         'use strict';
 
         return Component.extend({
-            defaults: {
-                template: 'PixelOpen_CloudflareTurnstile/turnstile',
-            },
             customer: customerData.get('customer'),
-            configSource: 'checkout',
-            turnstile: {
-                'sitekey': '',
-                'theme': 'auto',
-                'forms': []
-            },
-            action: 'default',
 
             /**
-             * Initialize
-             */
-            initialize: function () {
-                this._super();
-
-                if (typeof window[this.configSource] !== 'undefined' && window[this.configSource].turnstile) {
-                    this.turnstile = window[this.configSource].turnstile;
-                }
-            },
-
-            /**
-             * Can show message
+             * Can show widget
              *
              * @returns {boolean}
              */
             canShow: function () {
-                return !this.customer().firstname && this.turnstile.forms.indexOf(this.action) >= 0;
-            },
-
-            /**
-             * Show message
-             */
-            render: function (element) {
-                if (!this.turnstile.sitekey) {
-                    element.innerText = $.mage.__('Unable to secure the form. The sitekey is missing.');
-                } else {
-                    const result = turnstile.render(element, {
-                        sitekey: this.turnstile.sitekey,
-                        theme: this.turnstile.theme,
-                        action: this.turnstile.action
-                    });
-                    if (typeof result === 'undefined') {
-                        element.innerText = $.mage.__('Unable to secure the form');
-                    }
+                if (this.customer().firstname) {
+                    return false;
                 }
-            }
+
+                return this._super();
+            },
         });
     }
 );

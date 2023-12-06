@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace PixelOpen\CloudflareTurnstile\Block\Turnstile;
 
-use PixelOpen\CloudflareTurnstile\Model\Turnstile\ConfigProvider;
+use PixelOpen\CloudflareTurnstile\Model\Turnstile\ConfigProviderInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
@@ -19,18 +19,18 @@ class Config extends Template
 {
     protected SerializerInterface $serializer;
 
-    protected ConfigProvider $configProvider;
+    protected ConfigProviderInterface $configProvider;
 
     /**
      * @param Context $context
      * @param SerializerInterface $serializer
-     * @param ConfigProvider $configProvider
+     * @param ConfigProviderInterface $configProvider
      * @param mixed[] $data
      */
     public function __construct(
         Context $context,
         SerializerInterface $serializer,
-        ConfigProvider $configProvider,
+        ConfigProviderInterface $configProvider,
         array $data = []
     ) {
         $this->serializer     = $serializer;

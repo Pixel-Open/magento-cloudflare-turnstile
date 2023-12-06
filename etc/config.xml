@@ -12,8 +12,15 @@
         <pixel_open_cloudflare_turnstile>
             <settings>
                 <enabled>0</enabled>
-                <theme>light</theme>
             </settings>
+            <frontend>
+                <theme>light</theme>
+                <size>normal</size>
+            </frontend>
+            <adminhtml>
+                <theme>light</theme>
+                <size>compact</size>
+            </adminhtml>
         </pixel_open_cloudflare_turnstile>
     </default>
 </config>
