@@ -66,14 +66,14 @@ composer require pixelopen/magento-cloudflare-turnstile
 
 **Storefront**
 
-- **Enable**: enable Cloudflare Turnstile
+- **Enabled**: enable Cloudflare Turnstile
 - **Theme**: the Turnstile theme (auto, light or dark)
 - **Size**: the widget size (compact or normal)
 - **Forms to validate**: the frontend forms where a Turnstile validation is required
 
 **Admin Panel**
 
-- **Enable**: enable Cloudflare Turnstile
+- **Enabled**: enable Cloudflare Turnstile
 - **Theme**: the Turnstile theme (auto, light or dark)
 - **Size**: the widget size (compact or normal)
 - **Forms to validate**: the admin forms where a Turnstile validation is required
