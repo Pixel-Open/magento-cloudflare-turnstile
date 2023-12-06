@@ -1,7 +1,9 @@
 ## 100.2.0
 
-- Admin login and reset password form validation
-- Turnstile added on guest checkout login form
+- Admin "login" and "reset password" forms validation
+- Validation added on guest checkout login form
+- Widget size configuration
+- French translation
 
 ## 100.1.2
 

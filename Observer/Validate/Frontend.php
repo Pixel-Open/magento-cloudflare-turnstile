@@ -75,7 +75,7 @@ class Frontend extends Validate
      */
     public function canValidate(Request $request, ActionInterface $action): bool
     {
-        if (!$this->config->isEnabled()) {
+        if (!$this->config->isEnabledOnFront()) {
             return false;
         }
         if (!$request->isPost()) {

@@ -61,25 +61,26 @@ composer require pixelopen/magento-cloudflare-turnstile
 
 **Settings**
 
-- **Enable**: enable Cloudflare Turnstile
 - **Sitekey**: the sitekey given for the site in your Cloudflare dashboard
 - **Secret key**: the secret key given for the site in your Cloudflare dashboard
 
 **Storefront**
 
+- **Enable**: enable Cloudflare Turnstile
 - **Theme**: the Turnstile theme (auto, light or dark)
 - **Size**: the widget size (compact or normal)
 - **Forms to validate**: the frontend forms where a Turnstile validation is required
 
 **Admin Panel**
 
+- **Enable**: enable Cloudflare Turnstile
 - **Theme**: the Turnstile theme (auto, light or dark)
 - **Size**: the widget size (compact or normal)
 - **Forms to validate**: the admin forms where a Turnstile validation is required
 
 ### Override default config
 
-You can change the theme and size values for a specific form in the layout:
+You can specifically change theme and size values for a form in the layout:
 
 ```xml
 <?xml version="1.0"?>
@@ -98,6 +99,33 @@ You can change the theme and size values for a specific form in the layout:
         </referenceContainer>
     </body>
 </page>
+```
+
+### Command line configuration
+
+#### Settings
+
+```shell
+bin/magento config:set pixel_open_cloudflare_turnstile/settings/secret_key {secret_key}
+bin/magento config:set pixel_open_cloudflare_turnstile/settings/sitekey {sitekey}
+```
+
+#### Frontend
+
+```shell
+bin/magento config:set pixel_open_cloudflare_turnstile/frontend/enabled {1|0}
+bin/magento config:set pixel_open_cloudflare_turnstile/frontend/theme {auto|light|dark}
+bin/magento config:set pixel_open_cloudflare_turnstile/frontend/size {normal|compact}
+bin/magento config:set pixel_open_cloudflare_turnstile/frontend/forms contact,register,login,login-ajax,password
+```
+
+#### Admin
+
+```shell
+bin/magento config:set pixel_open_cloudflare_turnstile/adminhtml/enabled {1|0}
+bin/magento config:set pixel_open_cloudflare_turnstile/adminhtml/theme {auto|light|dark}
+bin/magento config:set pixel_open_cloudflare_turnstile/adminhtml/size {normal|compact}
+bin/magento config:set pixel_open_cloudflare_turnstile/adminhtml/forms login,password
 ```
 
 ### Testing
@@ -119,3 +147,34 @@ Use the following sitekeys and secret keys for testing purposes:
 | 1x0000000000000000000000000000000AA | Always passes                        |
 | 2x0000000000000000000000000000000AA | Always fails                         |
 | 3x0000000000000000000000000000000AA | Yields a "token already spent" error |
+
+### Definitely remove re-captcha
+
+To remove all native re-captcha modules, add all modules in the "replace" node of the `composer.json`.
+
+```json
+{
+  "replace": {
+    "magento/module-re-captcha-contact": "*",
+    "magento/module-re-captcha-customer": "*",
+    "magento/module-re-captcha-frontend-ui": "*",
+    "magento/module-re-captcha-migration": "*",
+    "magento/module-re-captcha-newsletter": "*",
+    "magento/module-re-captcha-paypal": "*",
+    "magento/module-re-captcha-review": "*",
+    "magento/module-re-captcha-send-friend": "*",
+    "magento/module-re-captcha-store-pickup": "*",
+    "magento/module-re-captcha-ui": "*",
+    "magento/module-re-captcha-user": "*",
+    "magento/module-re-captcha-validation": "*",
+    "magento/module-re-captcha-validation-api": "*",
+    "magento/module-re-captcha-version-2-checkbox": "*",
+    "magento/module-re-captcha-version-2-invisible": "*",
+    "magento/module-re-captcha-version-3-invisible": "*",
+    "magento/module-re-captcha-webapi-api": "*",
+    "magento/module-re-captcha-webapi-graph-ql": "*",
+    "magento/module-re-captcha-webapi-rest": "*",
+    "magento/module-re-captcha-webapi-ui": "*"
+  }
+}
+```

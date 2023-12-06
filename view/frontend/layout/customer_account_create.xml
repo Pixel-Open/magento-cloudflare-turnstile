@@ -10,7 +10,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="form.additional.info">
-            <block name="pixel.open.cloudflare.turnstile.register" class="PixelOpen\CloudflareTurnstile\Block\Turnstile" ifconfig="pixel_open_cloudflare_turnstile/settings/enabled">
+            <block name="pixel.open.cloudflare.turnstile.register" class="PixelOpen\CloudflareTurnstile\Block\Turnstile" ifconfig="pixel_open_cloudflare_turnstile/frontend/enabled">
                 <action method="setAction">
                     <argument name="action" xsi:type="string">register</argument>
                 </action>

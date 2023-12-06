@@ -13,7 +13,7 @@
     </head>
     <body>
         <referenceContainer name="before.body.end">
-            <block class="PixelOpen\CloudflareTurnstile\Block\Turnstile\Config" template="PixelOpen_CloudflareTurnstile::turnstile/config.phtml" ifconfig="pixel_open_cloudflare_turnstile/settings/enabled" />
+            <block class="PixelOpen\CloudflareTurnstile\Block\Turnstile\Config" template="PixelOpen_CloudflareTurnstile::turnstile/config.phtml" ifconfig="pixel_open_cloudflare_turnstile/frontend/enabled" />
         </referenceContainer>
         <referenceBlock name="authentication-popup">
             <arguments>

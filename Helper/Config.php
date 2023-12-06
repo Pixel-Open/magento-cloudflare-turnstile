@@ -14,27 +14,37 @@ use Magento\Framework\App\Helper\AbstractHelper;
 
 class Config extends AbstractHelper
 {
-    public const TURNSTILE_CONFIG_PATH_ENABLED = 'pixel_open_cloudflare_turnstile/settings/enabled';
-
     public const TURNSTILE_CONFIG_PATH_SECRET_KEY = 'pixel_open_cloudflare_turnstile/settings/secret_key';
     public const TURNSTILE_CONFIG_PATH_SITEKEY = 'pixel_open_cloudflare_turnstile/settings/sitekey';
 
+    public const TURNSTILE_CONFIG_PATH_FRONTEND_ENABLED = 'pixel_open_cloudflare_turnstile/frontend/enabled';
     public const TURNSTILE_CONFIG_PATH_FRONTEND_THEME = 'pixel_open_cloudflare_turnstile/frontend/theme';
     public const TURNSTILE_CONFIG_PATH_FRONTEND_SIZE = 'pixel_open_cloudflare_turnstile/frontend/size';
     public const TURNSTILE_CONFIG_PATH_FRONTEND_FORMS = 'pixel_open_cloudflare_turnstile/frontend/forms';
 
+    public const TURNSTILE_CONFIG_PATH_ADMINHTML_ENABLED = 'pixel_open_cloudflare_turnstile/adminhtml/enabled';
     public const TURNSTILE_CONFIG_PATH_ADMINHTML_THEME = 'pixel_open_cloudflare_turnstile/adminhtml/theme';
     public const TURNSTILE_CONFIG_PATH_ADMINHTML_SIZE = 'pixel_open_cloudflare_turnstile/adminhtml/size';
     public const TURNSTILE_CONFIG_PATH_ADMINHTML_FORMS = 'pixel_open_cloudflare_turnstile/adminhtml/forms';
 
     /**
-     * Is Turnstile enabled
+     * Is Turnstile enabled on front
      *
      * @return bool
      */
-    public function isEnabled(): bool
+    public function isEnabledOnFront(): bool
     {
-        return $this->scopeConfig->isSetFlag(self::TURNSTILE_CONFIG_PATH_ENABLED);
+        return $this->scopeConfig->isSetFlag(self::TURNSTILE_CONFIG_PATH_FRONTEND_ENABLED);
+    }
+
+    /**
+     * Is Turnstile enabled on admin
+     *
+     * @return bool
+     */
+    public function isEnabledOnAdmin(): bool
+    {
+        return $this->scopeConfig->isSetFlag(self::TURNSTILE_CONFIG_PATH_ADMINHTML_ENABLED);
     }
 
     /**

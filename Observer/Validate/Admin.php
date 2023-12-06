@@ -28,7 +28,7 @@ class Admin extends Validate
      */
     public function canValidate(Request $request, ActionInterface $action): bool
     {
-        if (!$this->config->isEnabled()) {
+        if (!$this->config->isEnabledOnAdmin()) {
             return false;
         }
         if (!$request->isPost()) {

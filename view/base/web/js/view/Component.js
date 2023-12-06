@@ -30,7 +30,7 @@ define(
                 'sitekey': '',
                 'forms': [],
                 'size': 'normal',
-                'theme': 'auto',
+                'theme': 'auto'
             },
             action: 'default',
             size: '', // Override config value if not empty
