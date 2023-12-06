@@ -113,6 +113,8 @@ class Validator
     }
 
     /**
+     * Retrieve all error codes
+     *
      * @return string[]
      */
     public function getErrorCodes(): array
@@ -126,7 +128,7 @@ class Validator
      * @param string $code
      * @return string
      */
-    protected static function getErrorMessage(string $code): string
+    protected function getErrorMessage(string $code): string
     {
         $messages = [
             'x-missing-response'     => 'please validate the security field.',
