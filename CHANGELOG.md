@@ -1,5 +1,6 @@
 ## 100.2.0
 
+- Fix widget resetting on ajax call
 - Admin "login" and "reset password" forms validation
 - Validation added on guest checkout login form
 - Widget size configuration

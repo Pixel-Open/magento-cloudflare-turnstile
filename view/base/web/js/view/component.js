@@ -34,7 +34,8 @@ define(
             },
             action: 'default',
             size: '', // Override config value if not empty
-            theme: '', // Override config value if not empty
+            theme: '', // Override config value if not empty,
+            widgetId: null,
 
             /**
              * Initialize
@@ -63,15 +64,35 @@ define(
                 if (!this.config.sitekey) {
                     element.innerText = $.mage.__('Unable to secure the form. The sitekey is missing.');
                 } else {
-                    const result = turnstile.render(element, {
+                    const widgetId = turnstile.render(element, {
                         sitekey: this.config.sitekey,
                         theme: this.theme || this.config.theme,
                         size: this.size || this.config.size,
                         action: this.action
                     });
-                    if (typeof result === 'undefined') {
+                    if (typeof widgetId === 'undefined') {
                         element.innerText = $.mage.__('Unable to secure the form');
+                    } else {
+                        this.widgetId = widgetId;
                     }
+
+                    $(document).on('ajaxComplete', function (event, xhr) {
+                        const result = xhr.responseJSON;
+                        if (result.hasOwnProperty('errors')) {
+                            if (result.errors) {
+                                this.reset();
+                            }
+                        }
+                    }.bind(this));
+                }
+            },
+
+            /**
+             * Reset turnstile
+             */
+            reset: function () {
+                if (this.widgetId) {
+                    turnstile.reset(this.widgetId);
                 }
             }
         });

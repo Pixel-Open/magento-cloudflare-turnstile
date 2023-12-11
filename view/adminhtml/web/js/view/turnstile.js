@@ -8,7 +8,7 @@
 /*global define*/
 define(
     [
-        'PixelOpen_CloudflareTurnstile/js/view/Component'
+        'PixelOpen_CloudflareTurnstile/js/view/component'
     ],
     function (
         Component,
