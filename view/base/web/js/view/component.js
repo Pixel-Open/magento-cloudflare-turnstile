@@ -74,16 +74,8 @@ define(
                         element.innerText = $.mage.__('Unable to secure the form');
                     } else {
                         this.widgetId = widgetId;
+                        this.afterRender();
                     }
-
-                    $(document).on('ajaxComplete', function (event, xhr) {
-                        const result = xhr.responseJSON;
-                        if (result.hasOwnProperty('errors')) {
-                            if (result.errors) {
-                                this.reset();
-                            }
-                        }
-                    }.bind(this));
                 }
             },
 
@@ -94,6 +86,27 @@ define(
                 if (this.widgetId) {
                     turnstile.reset(this.widgetId);
                 }
+            },
+
+            /**
+             * After render widget
+             */
+            afterRender: function () {
+                this.ajaxComplete();
+            },
+
+            /**
+             * Reset turnstile when Ajax request is complete with error
+             */
+            ajaxComplete: function () {
+                $(document).on('ajaxComplete', function (event, xhr) {
+                    const result = xhr.responseJSON;
+                    if (result.hasOwnProperty('errors')) {
+                        if (result.errors) {
+                            this.reset();
+                        }
+                    }
+                }.bind(this));
             }
         });
     }
