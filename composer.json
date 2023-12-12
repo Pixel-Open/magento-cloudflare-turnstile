@@ -2,6 +2,7 @@
   "name": "pixelopen/magento-cloudflare-turnstile",
   "description": "Protect your store from spam messages and spam user accounts with Cloudflare Turnstile",
   "require": {
+    "php": "^8",
     "magento/module-checkout": "*",
     "magento/module-config": "*",
     "magento/module-contact": "*",
