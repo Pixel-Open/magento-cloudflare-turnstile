@@ -21,7 +21,7 @@ define(
 
         return Component.extend({
             customer: customerData.get('customer'),
-            authentication: '.block-authentication',
+            authentication: '.authentication-dropdown, .popup-authentication',
 
             /**
              * Can show widget
@@ -60,10 +60,10 @@ define(
             },
 
             /**
-             * Render widget only when auth popup is open
+             * Render widget only when modal is open
              */
             loginAjax: function () {
-                $(this.authentication).on('contentUpdated', function () {
+                $(this.authentication).on('transitionend', function () {
                     this.render();
                 }.bind(this));
             },
