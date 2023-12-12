@@ -107,7 +107,7 @@ abstract class Validate implements ObserverInterface
      * @param Phrase $message
      * @return void
      */
-    #[NoReturn] protected function error(Request $request, ActionInterface $action, Phrase $message): void
+    protected function error(Request $request, ActionInterface $action, Phrase $message): void
     {
         $this->messageManager->addErrorMessage($message);
         $this->response->setRedirect($request->getServer('HTTP_REFERER', ''));

@@ -152,7 +152,7 @@ class Frontend extends Validate
      *
      * @return void
      */
-    #[NoReturn] protected function error(Request $request, ActionInterface $action, Phrase $message): void
+    protected function error(Request $request, ActionInterface $action, Phrase $message): void
     {
         if ($action instanceof AjaxLoginPost) {
             $data = [
