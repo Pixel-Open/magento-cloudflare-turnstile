@@ -22,6 +22,7 @@
                                             <item name="displayArea" xsi:type="string">additional-login-form-fields</item>
                                             <item name="action" xsi:type="string">login-ajax</item>
                                             <item name="configSource" xsi:type="string">turnstileConfig</item>
+                                            <item name="autoRendering" xsi:type="boolean">false</item>
                                         </item>
                                     </item>
                                 </item>

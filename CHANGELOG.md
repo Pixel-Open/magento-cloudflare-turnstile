@@ -1,10 +1,11 @@
 ## 100.2.0
 
-- Fix widget resetting on ajax call
 - Admin "login" and "reset password" forms validation
 - Validation added on guest checkout login form
 - Widget size configuration
 - French translation
+- Fix API request on each page with authentication popup
+- Fix widget resetting on ajax call
 
 ## 100.1.2
 

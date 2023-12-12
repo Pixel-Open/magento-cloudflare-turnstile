@@ -21,6 +21,7 @@ define(
 
         return Component.extend({
             customer: customerData.get('customer'),
+            authentication: '.block-authentication',
 
             /**
              * Can show widget
@@ -28,7 +29,8 @@ define(
              * @returns {boolean}
              */
             canShow: function () {
-                if (this.customer().firstname) {
+                if (this.customer().hasOwnProperty('firstname') && this.customer().firstname) {
+                    // Widget is disabled when the customer is logged in
                     return false;
                 }
 
@@ -58,12 +60,10 @@ define(
             },
 
             /**
-             * Render the widget when authentication popup is open
+             * Render widget only when auth popup is open
              */
             loginAjax: function () {
-                this.autoRender = false;
-
-                $('.block-authentication').on('contentUpdated', function () {
+                $(this.authentication).on('contentUpdated', function () {
                     this.render();
                 }.bind(this));
             },
@@ -75,10 +75,8 @@ define(
                 if (this.widgetId) {
                     $(document).on('ajaxComplete', function (event, xhr) {
                         const result = xhr.responseJSON;
-                        if (result.hasOwnProperty('errors')) {
-                            if (result.errors) {
-                                this.reset();
-                            }
+                        if (result.hasOwnProperty('errors') && result.errors) {
+                            this.reset();
                         }
                     }.bind(this));
                 }

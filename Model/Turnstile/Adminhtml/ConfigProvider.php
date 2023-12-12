@@ -33,6 +33,7 @@ class ConfigProvider implements ConfigProviderInterface
     {
         return [
             'config' => [
+                'enabled' => $this->config->isEnabledOnAdmin(),
                 'sitekey' => $this->config->getSiteKey(),
                 'theme'   => $this->config->getAdminTheme(),
                 'size'    => $this->config->getAdminSize(),

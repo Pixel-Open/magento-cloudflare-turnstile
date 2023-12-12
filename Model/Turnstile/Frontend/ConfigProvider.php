@@ -33,6 +33,7 @@ class ConfigProvider implements ConfigProviderInterface
     {
         return [
             'config' => [
+                'enabled' => $this->config->isEnabledOnFront(),
                 'sitekey' => $this->config->getSiteKey(),
                 'theme'   => $this->config->getFrontendTheme(),
                 'size'    => $this->config->getFrontendSize(),
