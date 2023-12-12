@@ -13,7 +13,7 @@
     </head>
     <body>
         <referenceContainer name="before.body.end">
-            <block class="PixelOpen\CloudflareTurnstile\Block\Turnstile\Config" template="PixelOpen_CloudflareTurnstile::turnstile/config.phtml" ifconfig="pixel_open_cloudflare_turnstile/settings/enabled" />
+            <block class="PixelOpen\CloudflareTurnstile\Block\Turnstile\Config" template="PixelOpen_CloudflareTurnstile::turnstile/config.phtml" ifconfig="pixel_open_cloudflare_turnstile/frontend/enabled" />
         </referenceContainer>
         <referenceBlock name="authentication-popup">
             <arguments>
@@ -26,6 +26,7 @@
                                     <item name="displayArea" xsi:type="string">additional-login-form-fields</item>
                                     <item name="action" xsi:type="string">login-ajax</item>
                                     <item name="configSource" xsi:type="string">turnstileConfig</item>
+                                    <item name="autoRendering" xsi:type="boolean">false</item>
                                 </item>
                             </item>
                         </item>

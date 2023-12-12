@@ -1,0 +1,8 @@
+#cf-turnstile {
+    margin-bottom: 3.5rem;
+}
+
+.cloudflare-turnstile {
+    font-weight: bold;
+    color: #c00;
+}

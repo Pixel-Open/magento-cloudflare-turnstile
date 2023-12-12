@@ -57,6 +57,26 @@ class Turnstile extends Template
     }
 
     /**
+     * Retrieve size, will override the config if set for block in layout
+     *
+     * @return string|null
+     */
+    public function getSize(): ?string
+    {
+        return $this->getData('size');
+    }
+
+    /**
+     * Retrieve theme, will override the config if set for block in layout
+     *
+     * @return string|null
+     */
+    public function getTheme(): ?string
+    {
+        return $this->getData('theme');
+    }
+
+    /**
      * Retrieve id
      *
      * @return string

@@ -8,15 +8,11 @@
 /*global define*/
 define(
     [
-        'ko',
         'jquery',
-        'uiComponent',
-        'Magento_Customer/js/customer-data',
-        'cfTurnstile',
-        'mage/translate'
+        'PixelOpen_CloudflareTurnstile/js/view/component',
+        'Magento_Customer/js/customer-data'
     ],
     function (
-        ko,
         $,
         Component,
         customerData
@@ -24,53 +20,65 @@ define(
         'use strict';
 
         return Component.extend({
-            defaults: {
-                template: 'PixelOpen_CloudflareTurnstile/turnstile',
-            },
             customer: customerData.get('customer'),
-            configSource: 'checkout',
-            turnstile: {
-                'sitekey': '',
-                'theme': 'auto',
-                'forms': []
-            },
-            action: 'default',
+            authentication: '.authentication-dropdown, .popup-authentication',
 
             /**
-             * Initialize
-             */
-            initialize: function () {
-                this._super();
-
-                if (typeof window[this.configSource] !== 'undefined' && window[this.configSource].turnstile) {
-                    this.turnstile = window[this.configSource].turnstile;
-                }
-            },
-
-            /**
-             * Can show message
+             * Can show widget
              *
              * @returns {boolean}
              */
             canShow: function () {
-                return !this.customer().firstname && this.turnstile.forms.indexOf(this.action) >= 0;
+                if (this.customer().hasOwnProperty('firstname') && this.customer().firstname) {
+                    // Widget is disabled when the customer is logged in
+                    return false;
+                }
+
+                return this._super();
             },
 
             /**
-             * Show message
+             * Before Render
              */
-            render: function (element) {
-                if (!this.turnstile.sitekey) {
-                    element.innerText = $.mage.__('Unable to secure the form. The sitekey is missing.');
-                } else {
-                    const result = turnstile.render(element, {
-                        sitekey: this.turnstile.sitekey,
-                        theme: this.turnstile.theme,
-                        action: this.turnstile.action
-                    });
-                    if (typeof result === 'undefined') {
-                        element.innerText = $.mage.__('Unable to secure the form');
-                    }
+            beforeRender: function () {
+                if (this.action === 'login-ajax') {
+                    this.loginAjax();
+                }
+
+                this._super();
+            },
+
+            /**
+             * After render widget
+             */
+            afterRender: function () {
+                if (this.action === 'login-ajax') {
+                    this.loginAjaxComplete();
+                }
+
+                this._super();
+            },
+
+            /**
+             * Render widget only when modal is open
+             */
+            loginAjax: function () {
+                $(this.authentication).on('transitionend', function () {
+                    this.render();
+                }.bind(this));
+            },
+
+            /**
+             * Reset turnstile when Ajax request is complete with error
+             */
+            loginAjaxComplete: function () {
+                if (this.widgetId) {
+                    $(document).on('ajaxComplete', function (event, xhr) {
+                        const result = xhr.responseJSON;
+                        if (result.hasOwnProperty('errors') && result.errors) {
+                            this.reset();
+                        }
+                    }.bind(this));
                 }
             }
         });

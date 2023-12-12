@@ -10,10 +10,16 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <pixel_open_cloudflare_turnstile>
-            <settings>
+            <frontend>
                 <enabled>0</enabled>
                 <theme>light</theme>
-            </settings>
+                <size>normal</size>
+            </frontend>
+            <adminhtml>
+                <enabled>0</enabled>
+                <theme>light</theme>
+                <size>compact</size>
+            </adminhtml>
         </pixel_open_cloudflare_turnstile>
     </default>
 </config>

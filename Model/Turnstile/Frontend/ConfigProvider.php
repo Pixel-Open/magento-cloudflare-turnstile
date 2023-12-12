@@ -8,10 +8,10 @@
 
 declare(strict_types=1);
 
-namespace PixelOpen\CloudflareTurnstile\Model\Turnstile;
+namespace PixelOpen\CloudflareTurnstile\Model\Turnstile\Frontend;
 
 use PixelOpen\CloudflareTurnstile\Helper\Config;
-use Magento\Checkout\Model\ConfigProviderInterface;
+use PixelOpen\CloudflareTurnstile\Model\Turnstile\ConfigProviderInterface;
 
 class ConfigProvider implements ConfigProviderInterface
 {
@@ -32,10 +32,12 @@ class ConfigProvider implements ConfigProviderInterface
     public function getConfig(): array
     {
         return [
-            'turnstile' => [
-                'sitekey' => $this->config->getSitekey(),
-                'theme'   => $this->config->getTheme(),
-                'forms'   => $this->config->getForms(),
+            'config' => [
+                'enabled' => $this->config->isEnabledOnFront(),
+                'sitekey' => $this->config->getSiteKey(),
+                'theme'   => $this->config->getFrontendTheme(),
+                'size'    => $this->config->getFrontendSize(),
+                'forms'   => $this->config->getFrontendForms(),
             ]
         ];
     }
