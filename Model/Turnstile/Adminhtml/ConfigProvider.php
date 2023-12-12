@@ -33,7 +33,7 @@ class ConfigProvider implements ConfigProviderInterface
     {
         return [
             'config' => [
-                'sitekey' => $this->config->getSitekey(),
+                'sitekey' => $this->config->getSiteKey(),
                 'theme'   => $this->config->getAdminTheme(),
                 'size'    => $this->config->getAdminSize(),
                 'forms'   => $this->config->getAdminForms(),

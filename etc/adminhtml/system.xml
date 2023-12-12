@@ -16,7 +16,7 @@
             <group id="settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Settings</label>
                 <field id="sitekey" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Sitekey</label>
+                    <label>Site key</label>
                     <validate>required-entry</validate>
                 </field>
                 <field id="secret_key" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">

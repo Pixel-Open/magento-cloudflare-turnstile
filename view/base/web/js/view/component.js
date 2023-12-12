@@ -36,6 +36,8 @@ define(
             size: '', // Override config value if not empty
             theme: '', // Override config value if not empty,
             widgetId: null,
+            autoRender: true,
+            element: null,
 
             /**
              * Initialize
@@ -58,55 +60,58 @@ define(
             },
 
             /**
-             * Show widget
+             * Load widget
+             *
+             * @param {object} element
              */
-            render: function (element) {
+            load: function (element) {
+                this.element = element;
+
                 if (!this.config.sitekey) {
-                    element.innerText = $.mage.__('Unable to secure the form. The sitekey is missing.');
+                    this.element.innerText = $.mage.__('Unable to secure the form. The site key is missing.');
                 } else {
-                    const widgetId = turnstile.render(element, {
-                        sitekey: this.config.sitekey,
-                        theme: this.theme || this.config.theme,
-                        size: this.size || this.config.size,
-                        action: this.action
-                    });
-                    if (typeof widgetId === 'undefined') {
-                        element.innerText = $.mage.__('Unable to secure the form');
-                    } else {
-                        this.widgetId = widgetId;
-                        this.afterRender();
+                    this.beforeRender();
+                    if (this.autoRender) {
+                        this.render();
                     }
                 }
             },
 
             /**
-             * Reset turnstile
+             * Render widget
+             */
+            render: function () {
+                const widgetId = turnstile.render(this.element, {
+                    sitekey: this.config.sitekey,
+                    theme: this.theme || this.config.theme,
+                    size: this.size || this.config.size,
+                    action: this.action
+                });
+                if (typeof widgetId === 'undefined') {
+                    this.element.innerText = $.mage.__('Unable to secure the form');
+                } else {
+                    this.widgetId = widgetId;
+                }
+                this.afterRender();
+            },
+
+            /**
+             * Before render widget
+             */
+            beforeRender: function () {},
+
+            /**
+             * After render widget
+             */
+            afterRender: function () {},
+
+            /**
+             * Reset widget
              */
             reset: function () {
                 if (this.widgetId) {
                     turnstile.reset(this.widgetId);
                 }
-            },
-
-            /**
-             * After render widget
-             */
-            afterRender: function () {
-                this.ajaxComplete();
-            },
-
-            /**
-             * Reset turnstile when Ajax request is complete with error
-             */
-            ajaxComplete: function () {
-                $(document).on('ajaxComplete', function (event, xhr) {
-                    const result = xhr.responseJSON;
-                    if (result.hasOwnProperty('errors')) {
-                        if (result.errors) {
-                            this.reset();
-                        }
-                    }
-                }.bind(this));
             }
         });
     }

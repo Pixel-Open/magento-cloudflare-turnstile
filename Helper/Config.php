@@ -62,7 +62,7 @@ class Config extends AbstractHelper
      *
      * @return string
      */
-    public function getSitekey(): string
+    public function getSiteKey(): string
     {
         return (string)$this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_SITEKEY);
     }
