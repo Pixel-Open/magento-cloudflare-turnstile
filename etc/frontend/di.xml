@@ -10,7 +10,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="PixelOpen\CloudflareTurnstile\Observer\Validate\Frontend">
         <arguments>
-            <argument name="reviewSession" xsi:type="object">Magento\Review\Model\Session</argument>
+            <argument name="persistor" xsi:type="object">PixelOpen\CloudflareTurnstile\Model\Persistor\Frontend</argument>
             <argument name="data" xsi:type="array">
                 <item name="actions" xsi:type="array">
                     <item name="contact" xsi:type="object">Magento\Contact\Controller\Index\Post</item>
@@ -21,6 +21,11 @@
                     <item name="review" xsi:type="object">Magento\Review\Controller\Product\Post</item>
                 </item>
             </argument>
+        </arguments>
+    </type>
+    <type name="PixelOpen\CloudflareTurnstile\Model\Persistor\Frontend">
+        <arguments>
+            <argument name="reviewSession" xsi:type="object">Magento\Review\Model\Session</argument>
         </arguments>
     </type>
     <preference for="PixelOpen\CloudflareTurnstile\Model\Turnstile\ConfigProviderInterface" type="PixelOpen\CloudflareTurnstile\Model\Turnstile\Frontend\ConfigProvider" />

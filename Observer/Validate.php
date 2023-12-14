@@ -22,6 +22,7 @@ use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Phrase;
 use Magento\Framework\Serialize\Serializer\Json;
 use PixelOpen\CloudflareTurnstile\Helper\Config;
+use PixelOpen\CloudflareTurnstile\Model\PersistorInterface;
 use PixelOpen\CloudflareTurnstile\Model\Validator;
 
 abstract class Validate implements ObserverInterface
@@ -36,6 +37,8 @@ abstract class Validate implements ObserverInterface
 
     protected Config $config;
 
+    protected ?PersistorInterface $persistor = null;
+
     protected array $actions = [];
 
     /**
@@ -44,6 +47,7 @@ abstract class Validate implements ObserverInterface
      * @param Validator $validator
      * @param Json $json
      * @param Config $config
+     * @param PersistorInterface|null $persistor
      * @param array $data
      */
     public function __construct(
@@ -52,6 +56,7 @@ abstract class Validate implements ObserverInterface
         Validator $validator,
         Json $json,
         Config $config,
+        ?PersistorInterface $persistor = null,
         array $data = []
     ) {
         $this->messageManager = $messageManager;
@@ -59,6 +64,7 @@ abstract class Validate implements ObserverInterface
         $this->validator      = $validator;
         $this->json           = $json;
         $this->config         = $config;
+        $this->persistor      = $persistor;
         $this->actions        = $data['actions'] ?? [];
     }
 
@@ -78,7 +84,7 @@ abstract class Validate implements ObserverInterface
         if ($this->canValidate($request, $action)) {
             try {
                 if (!$this->validator->isValid($this->getCfResponse($request, $action))) {
-                    $this->persist($request, $action);
+                    $this->persistor?->persist($request, $action);
                     $this->error(
                         $request,
                         $action,
@@ -144,18 +150,6 @@ abstract class Validate implements ObserverInterface
         }
 
         return false;
-    }
-
-    /**
-     * Persist data
-     *
-     * @param Request $request
-     * @param ActionInterface $action
-     * @return bool
-     */
-    public function persist(Request $request, ActionInterface $action): bool
-    {
-        return true;
     }
 
     /**

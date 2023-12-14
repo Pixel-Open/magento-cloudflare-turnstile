@@ -2,6 +2,7 @@
 
 - Fix review form persistence
 - Simpler way to add an action to validate
+- New data persistor interface
 
 ## 100.2.0
 
