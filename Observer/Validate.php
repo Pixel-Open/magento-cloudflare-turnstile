@@ -36,25 +36,30 @@ abstract class Validate implements ObserverInterface
 
     protected Config $config;
 
+    protected array $actions = [];
+
     /**
      * @param ManagerInterface $messageManager
-     * @param Response         $response
-     * @param Validator        $validator
-     * @param Json             $json
-     * @param Config           $config
+     * @param Response $response
+     * @param Validator $validator
+     * @param Json $json
+     * @param Config $config
+     * @param array $data
      */
     public function __construct(
         ManagerInterface $messageManager,
         Response $response,
         Validator $validator,
         Json $json,
-        Config $config
+        Config $config,
+        array $data = []
     ) {
         $this->messageManager = $messageManager;
         $this->response       = $response;
         $this->validator      = $validator;
         $this->json           = $json;
         $this->config         = $config;
+        $this->actions        = $data['actions'] ?? [];
     }
 
     /**
@@ -119,11 +124,27 @@ abstract class Validate implements ObserverInterface
     /**
      * Can validate action
      *
-     * @param Request         $request
+     * @param Request $request
      * @param ActionInterface $action
      * @return bool
      */
-    abstract public function canValidate(Request $request, ActionInterface $action): bool;
+    public function canValidate(Request $request, ActionInterface $action): bool
+    {
+        if (!$this->isEnabled()) {
+            return false;
+        }
+        if (!$request->isPost()) {
+            return false;
+        }
+
+        foreach ($this->actions as $form => $instance) {
+            if ($this->isFormEnabled($form) && $action instanceof $instance) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /**
      * Persist data
@@ -132,5 +153,23 @@ abstract class Validate implements ObserverInterface
      * @param ActionInterface $action
      * @return bool
      */
-    abstract public function persist(Request $request, ActionInterface $action): bool;
+    public function persist(Request $request, ActionInterface $action): bool
+    {
+        return true;
+    }
+
+    /**
+     * Test if the form is enabled
+     *
+     * @param string $form
+     * @return bool
+     */
+    abstract public function isFormEnabled(string $form): bool;
+
+    /**
+     * Retrieve if validator is globally enabled
+     *
+     * @return bool
+     */
+    abstract public function isEnabled(): bool;
 }

@@ -10,11 +10,8 @@ declare(strict_types=1);
 
 namespace PixelOpen\CloudflareTurnstile\Observer\Validate;
 
-use JetBrains\PhpStorm\NoReturn;
 use Magento\Contact\Controller\Index\Post as ContactPost;
 use Magento\Customer\Controller\Account\CreatePost;
-use Magento\Customer\Controller\Account\ForgotPasswordPost;
-use Magento\Customer\Controller\Account\LoginPost;
 use Magento\Customer\Controller\Ajax\Login as AjaxLoginPost;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\ActionInterface;
@@ -27,7 +24,6 @@ use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\Session\Generic;
 use Magento\Review\Controller\Product\Post as ReviewPost;
 use PixelOpen\CloudflareTurnstile\Helper\Config;
-use PixelOpen\CloudflareTurnstile\Model\Config\Source\Forms\Frontend as FrontendForms;
 use PixelOpen\CloudflareTurnstile\Model\Validator;
 use PixelOpen\CloudflareTurnstile\Observer\Validate;
 
@@ -48,6 +44,7 @@ class Frontend extends Validate
      * @param DataPersistorInterface $dataPersistor
      * @param CustomerSession $customerSession
      * @param Generic $reviewSession
+     * @param array $data
      */
     public function __construct(
         ManagerInterface $messageManager,
@@ -57,53 +54,51 @@ class Frontend extends Validate
         Config $config,
         DataPersistorInterface $dataPersistor,
         CustomerSession $customerSession,
-        Generic $reviewSession
+        Generic $reviewSession,
+        array $data = []
     ) {
         $this->dataPersistor = $dataPersistor;
         $this->customerSession = $customerSession;
         $this->reviewSession = $reviewSession;
 
-        parent::__construct($messageManager, $response, $validator, $json, $config);
+        parent::__construct($messageManager, $response, $validator, $json, $config, $data);
     }
 
     /**
      * Can validate action
      *
-     * @param Request         $request
+     * @param Request $request
      * @param ActionInterface $action
      * @return bool
      */
     public function canValidate(Request $request, ActionInterface $action): bool
     {
-        if (!$this->config->isEnabledOnFront()) {
-            return false;
-        }
-        if (!$request->isPost()) {
-            return false;
-        }
         if ($this->customerSession->isLoggedIn()) {
             return false;
         }
-        if ($this->validator->isFrontendFormEnabled(FrontendForms::FORM_CONTACT) && $action instanceof ContactPost) {
-            return true;
-        }
-        if ($this->validator->isFrontendFormEnabled(FrontendForms::FORM_PASSWORD) && $action instanceof ForgotPasswordPost) {
-            return true;
-        }
-        if ($this->validator->isFrontendFormEnabled(FrontendForms::FORM_REGISTER) && $action instanceof CreatePost) {
-            return true;
-        }
-        if ($this->validator->isFrontendFormEnabled(FrontendForms::FORM_LOGIN) && $action instanceof LoginPost) {
-            return true;
-        }
-        if ($this->validator->isFrontendFormEnabled(FrontendForms::FORM_LOGIN_AJAX) && $action instanceof AjaxLoginPost) {
-            return true;
-        }
-        if ($this->validator->isFrontendFormEnabled(FrontendForms::FORM_REVIEW) && $action instanceof ReviewPost) {
-            return true;
-        }
 
-        return false;
+        return parent::canValidate($request, $action);
+    }
+
+    /**
+     * Test if the form is enabled
+     *
+     * @param string $form
+     * @return bool
+     */
+    public function isFormEnabled(string $form): bool
+    {
+        return in_array($form, $this->config->getFrontendForms());
+    }
+
+    /**
+     * Retrieve if validator is globally enabled
+     *
+     * @return bool
+     */
+    public function isEnabled(): bool
+    {
+        return $this->config->isEnabledOnFront();
     }
 
     /**

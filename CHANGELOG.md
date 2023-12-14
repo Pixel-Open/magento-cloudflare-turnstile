@@ -1,3 +1,8 @@
+## 100.2.1
+
+- Fix review form persistence
+- Simpler way to add an action to validate
+
 ## 100.2.0
 
 - Admin "login" and "reset password" forms validation

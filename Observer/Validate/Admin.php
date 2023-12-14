@@ -10,49 +10,28 @@ declare(strict_types=1);
 
 namespace PixelOpen\CloudflareTurnstile\Observer\Validate;
 
-use Magento\Backend\Controller\Adminhtml\Index\Index as Login;
-use Magento\Framework\App\ActionInterface;
-use Magento\Framework\App\Request\Http as Request;
-use Magento\User\Controller\Adminhtml\Auth\Forgotpassword;
-use PixelOpen\CloudflareTurnstile\Model\Config\Source\Forms\Adminhtml as AdminForms;
 use PixelOpen\CloudflareTurnstile\Observer\Validate;
 
 class Admin extends Validate
 {
     /**
-     * Can validate action
+     * Retrieve if validator is globally enabled
      *
-     * @param Request         $request
-     * @param ActionInterface $action
      * @return bool
      */
-    public function canValidate(Request $request, ActionInterface $action): bool
+    public function isEnabled(): bool
     {
-        if (!$this->config->isEnabledOnAdmin()) {
-            return false;
-        }
-        if (!$request->isPost()) {
-            return false;
-        }
-        if ($this->validator->isAdminFormEnabled(AdminForms::FORM_LOGIN) && $action instanceof Login) {
-            return true;
-        }
-        if ($this->validator->isAdminFormEnabled(AdminForms::FORM_PASSWORD) && $action instanceof Forgotpassword) {
-            return true;
-        }
-
-        return false;
+        return $this->config->isEnabledOnAdmin();
     }
 
     /**
-     * Persist data
+     * Test if the form is enabled
      *
-     * @param Request $request
-     * @param ActionInterface $action
+     * @param string $form
      * @return bool
      */
-    public function persist(Request $request, ActionInterface $action): bool
+    public function isFormEnabled(string $form): bool
     {
-        return true;
+        return in_array($form, $this->config->getAdminForms());
     }
 }
