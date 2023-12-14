@@ -12,8 +12,6 @@ namespace PixelOpen\CloudflareTurnstile\Observer\Validate;
 
 use Magento\Customer\Controller\Ajax\Login as AjaxLoginPost;
 use Magento\Customer\Model\Session as CustomerSession;
-use Magento\Framework\App\ActionInterface;
-use Magento\Framework\App\Request\Http as Request;
 use Magento\Framework\App\Response\Http as Response;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Phrase;
@@ -56,17 +54,15 @@ class Frontend extends Validate
     /**
      * Can validate action
      *
-     * @param Request $request
-     * @param ActionInterface $action
      * @return bool
      */
-    public function canValidate(Request $request, ActionInterface $action): bool
+    public function canValidate(): bool
     {
         if ($this->customerSession->isLoggedIn()) {
             return false;
         }
 
-        return parent::canValidate($request, $action);
+        return parent::canValidate();
     }
 
     /**
@@ -93,32 +89,27 @@ class Frontend extends Validate
     /**
      * Retrieve Cloudflare Turnstile response
      *
-     * @param Request $request
-     * @param ActionInterface $action
      * @return string|null
      */
-    public function getCfResponse(Request $request, ActionInterface $action): ?string
+    public function getCfResponse(): ?string
     {
-        if ($action instanceof AjaxLoginPost) {
-            return $this->json->unserialize($request->getContent())['cf-turnstile-response'] ?? null;
+        if ($this->action instanceof AjaxLoginPost) {
+            return $this->json->unserialize($this->request?->getContent() ?? '{}')['cf-turnstile-response'] ?? null;
         }
-        return parent::getCfResponse($request, $action);
+        return parent::getCfResponse();
     }
 
     /**
      * Send error
      *
-     * @param Request $request
-     * @param ActionInterface $action
      * @param Phrase $message
-     *
      * @return void
      */
-    protected function error(Request $request, ActionInterface $action, Phrase $message): void
+    protected function error(Phrase $message): void
     {
-        if ($action instanceof AjaxLoginPost) {
+        if ($this->action instanceof AjaxLoginPost) {
             $data = [
-                'errors'  => true,
+                'errors' => true,
                 'message' => $message
             ];
             $this->response->representJson($this->json->serialize($data));
@@ -127,6 +118,6 @@ class Frontend extends Validate
             exit();
         }
 
-        parent::error($request, $action, $message);
+        parent::error($message);
     }
 }

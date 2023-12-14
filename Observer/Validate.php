@@ -11,8 +11,6 @@ declare(strict_types=1);
 namespace PixelOpen\CloudflareTurnstile\Observer;
 
 use Exception;
-use JetBrains\PhpStorm\NoReturn;
-use Magento\Customer\Controller\Ajax\Login as AjaxLoginPost;
 use Magento\Framework\App\ActionInterface;
 use Magento\Framework\App\Request\Http as Request;
 use Magento\Framework\App\Response\Http as Response;
@@ -40,6 +38,10 @@ abstract class Validate implements ObserverInterface
     protected ?PersistorInterface $persistor = null;
 
     protected array $actions = [];
+
+    public ?ActionInterface $action = null;
+
+    public ?Request $request = null;
 
     /**
      * @param ManagerInterface $messageManager
@@ -76,23 +78,19 @@ abstract class Validate implements ObserverInterface
      */
     public function execute(Observer $observer): void
     {
-        /** @var ActionInterface $action */
-        $action = $observer->getEvent()->getData('controller_action');
-        /** @var Request $request */
-        $request = $observer->getEvent()->getData('request');
+        $this->action = $observer->getEvent()->getData('controller_action');
+        $this->request = $observer->getEvent()->getData('request');
 
-        if ($this->canValidate($request, $action)) {
+        if ($this->canValidate()) {
             try {
-                if (!$this->validator->isValid($this->getCfResponse($request, $action))) {
-                    $this->persistor?->persist($request, $action);
+                if (!$this->validator->isValid($this->getCfResponse())) {
+                    $this->persistor?->persist($this->request, $this->action);
                     $this->error(
-                        $request,
-                        $action,
                         __('Security validation error: %1', join(', ', $this->validator->getErrorMessages()))
                     );
                 }
             } catch (Exception $exception) {
-                $this->error($request, $action, __('Security validation error: %1', $exception->getMessage()));
+                $this->error(__('Security validation error: %1', $exception->getMessage()));
             }
         }
     }
@@ -100,28 +98,23 @@ abstract class Validate implements ObserverInterface
     /**
      * Retrieve Cloudflare Turnstile response
      *
-     * @param Request $request
-     * @param ActionInterface $action
-     *
      * @return string|null
      */
-    public function getCfResponse(Request $request, ActionInterface $action): ?string
+    public function getCfResponse(): ?string
     {
-        return $request->getParam('cf-turnstile-response');
+        return $this->request?->getParam('cf-turnstile-response');
     }
 
     /**
      * Send error
      *
-     * @param Request $request
-     * @param ActionInterface $action
      * @param Phrase $message
      * @return void
      */
-    protected function error(Request $request, ActionInterface $action, Phrase $message): void
+    protected function error(Phrase $message): void
     {
         $this->messageManager->addErrorMessage($message);
-        $this->response->setRedirect($request->getServer('HTTP_REFERER', ''));
+        $this->response->setRedirect($this->request?->getServer('HTTP_REFERER', ''));
 
         $this->response->sendResponse();
         exit();
@@ -130,21 +123,19 @@ abstract class Validate implements ObserverInterface
     /**
      * Can validate action
      *
-     * @param Request $request
-     * @param ActionInterface $action
      * @return bool
      */
-    public function canValidate(Request $request, ActionInterface $action): bool
+    public function canValidate(): bool
     {
         if (!$this->isEnabled()) {
             return false;
         }
-        if (!$request->isPost()) {
+        if (!$this->request?->isPost()) {
             return false;
         }
 
         foreach ($this->actions as $form => $instance) {
-            if ($this->isFormEnabled($form) && $action instanceof $instance) {
+            if ($this->isFormEnabled($form) && $this->action instanceof $instance) {
                 return true;
             }
         }
