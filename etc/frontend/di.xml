@@ -28,5 +28,5 @@
             <argument name="reviewSession" xsi:type="object">Magento\Review\Model\Session</argument>
         </arguments>
     </type>
-    <preference for="PixelOpen\CloudflareTurnstile\Model\Turnstile\ConfigProviderInterface" type="PixelOpen\CloudflareTurnstile\Model\Turnstile\Frontend\ConfigProvider" />
+    <preference for="PixelOpen\CloudflareTurnstile\Model\ConfigProviderInterface" type="PixelOpen\CloudflareTurnstile\Model\ConfigProvider\Frontend" />
 </config>

@@ -18,5 +18,5 @@
             </argument>
         </arguments>
     </type>
-    <preference for="PixelOpen\CloudflareTurnstile\Model\Turnstile\ConfigProviderInterface" type="PixelOpen\CloudflareTurnstile\Model\Turnstile\Adminhtml\ConfigProvider" />
+    <preference for="PixelOpen\CloudflareTurnstile\Model\ConfigProviderInterface" type="PixelOpen\CloudflareTurnstile\Model\ConfigProvider\Adminhtml" />
 </config>

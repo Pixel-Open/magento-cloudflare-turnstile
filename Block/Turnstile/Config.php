@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace PixelOpen\CloudflareTurnstile\Block\Turnstile;
 
-use PixelOpen\CloudflareTurnstile\Model\Turnstile\ConfigProviderInterface;
+use PixelOpen\CloudflareTurnstile\Model\ConfigProviderInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
