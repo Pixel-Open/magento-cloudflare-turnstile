@@ -25,8 +25,8 @@ class Validator
     protected array $errors;
 
     /**
-     * @param Curl   $curl
-     * @param Json   $json
+     * @param Curl $curl
+     * @param Json $json
      * @param Config $config
      */
     public function __construct(
@@ -34,31 +34,9 @@ class Validator
         Json $json,
         Config $config
     ) {
-        $this->curl   = $curl;
-        $this->json   = $json;
+        $this->curl = $curl;
+        $this->json = $json;
         $this->config = $config;
-    }
-
-    /**
-     * Test if frontend form is enabled
-     *
-     * @param string $action
-     * @return bool
-     */
-    public function isFrontendFormEnabled(string $action): bool
-    {
-        return in_array($action, $this->config->getFrontendForms());
-    }
-
-    /**
-     * Test if admin form is enabled
-     *
-     * @param string $action
-     * @return bool
-     */
-    public function isAdminFormEnabled(string $action): bool
-    {
-        return in_array($action, $this->config->getAdminForms());
     }
 
     /**

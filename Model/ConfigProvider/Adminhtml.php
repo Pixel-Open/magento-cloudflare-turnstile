@@ -8,12 +8,12 @@
 
 declare(strict_types=1);
 
-namespace PixelOpen\CloudflareTurnstile\Model\Turnstile\Frontend;
+namespace PixelOpen\CloudflareTurnstile\Model\ConfigProvider;
 
 use PixelOpen\CloudflareTurnstile\Helper\Config;
-use PixelOpen\CloudflareTurnstile\Model\Turnstile\ConfigProviderInterface;
+use PixelOpen\CloudflareTurnstile\Model\ConfigProviderInterface;
 
-class ConfigProvider implements ConfigProviderInterface
+class Adminhtml implements ConfigProviderInterface
 {
     protected Config $config;
 
@@ -33,11 +33,11 @@ class ConfigProvider implements ConfigProviderInterface
     {
         return [
             'config' => [
-                'enabled' => $this->config->isEnabledOnFront(),
+                'enabled' => $this->config->isEnabledOnAdmin(),
                 'sitekey' => $this->config->getSiteKey(),
-                'theme'   => $this->config->getFrontendTheme(),
-                'size'    => $this->config->getFrontendSize(),
-                'forms'   => $this->config->getFrontendForms(),
+                'theme'   => $this->config->getAdminTheme(),
+                'size'    => $this->config->getAdminSize(),
+                'forms'   => $this->config->getAdminForms(),
             ]
         ];
     }

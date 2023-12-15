@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace PixelOpen\CloudflareTurnstile\Model\Turnstile;
+namespace PixelOpen\CloudflareTurnstile\Model;
 
 interface ConfigProviderInterface
 {
