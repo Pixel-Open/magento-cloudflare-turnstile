@@ -1,3 +1,7 @@
+## 100.2.2
+
+- Invalid response message updated
+
 ## 100.2.1
 
 - Fix review form persistence
