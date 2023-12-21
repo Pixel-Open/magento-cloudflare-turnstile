@@ -109,7 +109,7 @@ class Validator
     protected function getErrorMessage(string $code): string
     {
         $messages = [
-            'x-missing-response'     => 'please validate the security field or wait a few seconds before validating.',
+            'x-missing-response'     => 'please validate the security field or wait a few seconds before submitting the form.',
             'x-missing-secret-key'   => 'unable to validate the form, the secret key is missing.',
             'x-unavailable'          => 'unable to contact Cloudflare to validate the form.',
             'missing-input-secret'   => 'the secret parameter was not passed.',
