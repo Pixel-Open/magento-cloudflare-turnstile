@@ -11,7 +11,7 @@
 "Size","Taille"
 "Forms to validate","Formulaires à valider"
 "Admin Panel","Administration"
-"please validate the security field.","veuillez valider le champ de sécurité."
+"please validate the security field or wait a few seconds before submitting the form.","veuillez valider le champ de sécurité ou attendre quelques secondes avant de soumettre le formulaire."
 "unable to validate the form, the secret key is missing.","impossible de valider le formulaire, la clé secrète est manquante."
 "unable to contact Cloudflare to validate the form.","impossible de contacter Cloudflare pour valider le formulaire."
 "the secret parameter was not passed.","le paramètre secret n'a pas été transmis."

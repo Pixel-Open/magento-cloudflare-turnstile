@@ -19,6 +19,7 @@
                     <item name="login" xsi:type="object">Magento\Customer\Controller\Account\LoginPost</item>
                     <item name="login-ajax" xsi:type="object">Magento\Customer\Controller\Ajax\Login</item>
                     <item name="review" xsi:type="object">Magento\Review\Controller\Product\Post</item>
+                    <item name="send-friend" xsi:type="object">Magento\SendFriend\Controller\Product\Sendmail</item>
                 </item>
             </argument>
         </arguments>

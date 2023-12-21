@@ -11,7 +11,7 @@
 "Size","Size"
 "Forms to validate","Forms to validate"
 "Admin Panel","Admin Panel"
-"please validate the security field.","please validate the security field."
+"please validate the security field or wait a few seconds before submitting the form.","please validate the security field or wait a few seconds before validating."
 "unable to validate the form, the secret key is missing.","unable to validate the form, the secret key is missing."
 "unable to contact Cloudflare to validate the form.","unable to contact Cloudflare to validate the form."
 "the secret parameter was not passed.","the secret parameter was not passed."

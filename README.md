@@ -17,6 +17,7 @@
 - Register
 - Reset password
 - Review
+- Send product to friend
 
 ### Admin Forms
 
@@ -155,10 +156,16 @@ To remove all native re-captcha modules, add all modules in the "replace" node o
 ```json
 {
   "replace": {
+    "magento/module-re-captcha-admin-ui": "*",
+    "magento/module-re-captcha-checkout": "*",
+    "magento/module-re-captcha-checkout-sales-rule": "*",
     "magento/module-re-captcha-contact": "*",
     "magento/module-re-captcha-customer": "*",
     "magento/module-re-captcha-frontend-ui": "*",
+    "magento/module-re-captcha-gift-card": "*",
+    "magento/module-re-captcha-invitation": "*",
     "magento/module-re-captcha-migration": "*",
+    "magento/module-re-captcha-multiple-wishlist": "*",
     "magento/module-re-captcha-newsletter": "*",
     "magento/module-re-captcha-paypal": "*",
     "magento/module-re-captcha-review": "*",
