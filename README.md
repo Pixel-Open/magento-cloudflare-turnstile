@@ -17,6 +17,7 @@
 - Register
 - Reset password
 - Review
+- Send product to friend
 
 ### Admin Forms
 

@@ -20,6 +20,7 @@ class Frontend extends Forms
     public const FORM_LOGIN_AJAX = 'login-ajax';
     public const FORM_PASSWORD = 'password';
     public const FORM_REVIEW = 'review';
+    public const FORM_SEND_FRIEND = 'send-friend';
 
     public function toArray(): array
     {
@@ -30,6 +31,7 @@ class Frontend extends Forms
             self::FORM_LOGIN_AJAX,
             self::FORM_PASSWORD,
             self::FORM_REVIEW,
+            self::FORM_SEND_FRIEND
         ];
     }
 }

@@ -1,6 +1,7 @@
 ## 100.2.2
 
 - Invalid response message updated
+- Send product to friend form protection
 
 ## 100.2.1
 
