@@ -12,8 +12,8 @@
         <arguments>
             <argument name="data" xsi:type="array">
                 <item name="actions" xsi:type="array">
-                    <item name="login" xsi:type="object">Magento\Backend\Controller\Adminhtml\Index\Index</item>
-                    <item name="password" xsi:type="object">Magento\User\Controller\Adminhtml\Auth\Forgotpassword</item>
+                    <item name="login" xsi:type="string">Magento\Backend\Controller\Adminhtml\Index\Index</item>
+                    <item name="password" xsi:type="string">Magento\User\Controller\Adminhtml\Auth\Forgotpassword</item>
                 </item>
             </argument>
         </arguments>

@@ -135,7 +135,7 @@ abstract class Validate implements ObserverInterface
         }
 
         foreach ($this->actions as $form => $instance) {
-            if ($this->isFormEnabled($form) && $this->action instanceof $instance) {
+            if ($this->isFormEnabled($form) && is_a($this->action, $instance)) {
                 return true;
             }
         }
