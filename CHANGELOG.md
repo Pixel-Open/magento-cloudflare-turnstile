@@ -1,3 +1,7 @@
+## 100.2.3
+
+- Avoid PHP error when module action class does not exist
+
 ## 100.2.2
 
 - Invalid response message updated
