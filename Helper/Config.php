@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace PixelOpen\CloudflareTurnstile\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Store\Model\ScopeInterface;
 
 class Config extends AbstractHelper
 {
@@ -34,7 +35,10 @@ class Config extends AbstractHelper
      */
     public function isEnabledOnFront(): bool
     {
-        return $this->scopeConfig->isSetFlag(self::TURNSTILE_CONFIG_PATH_FRONTEND_ENABLED);
+        return $this->scopeConfig->isSetFlag(
+            self::TURNSTILE_CONFIG_PATH_FRONTEND_ENABLED,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     /**
@@ -44,7 +48,10 @@ class Config extends AbstractHelper
      */
     public function isEnabledOnAdmin(): bool
     {
-        return $this->scopeConfig->isSetFlag(self::TURNSTILE_CONFIG_PATH_ADMINHTML_ENABLED);
+        return $this->scopeConfig->isSetFlag(
+            self::TURNSTILE_CONFIG_PATH_ADMINHTML_ENABLED,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     /**
@@ -54,7 +61,10 @@ class Config extends AbstractHelper
      */
     public function getSecretKey(): string
     {
-        return (string)$this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_SECRET_KEY);
+        return (string)$this->scopeConfig->getValue(
+            self::TURNSTILE_CONFIG_PATH_SECRET_KEY,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     /**
@@ -64,7 +74,10 @@ class Config extends AbstractHelper
      */
     public function getSiteKey(): string
     {
-        return (string)$this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_SITEKEY);
+        return (string)$this->scopeConfig->getValue(
+            self::TURNSTILE_CONFIG_PATH_SITEKEY,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     /**
@@ -74,7 +87,10 @@ class Config extends AbstractHelper
      */
     public function getFrontendTheme(): string
     {
-        return (string)$this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_FRONTEND_THEME);
+        return (string)$this->scopeConfig->getValue(
+            self::TURNSTILE_CONFIG_PATH_FRONTEND_THEME,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     /**
@@ -84,7 +100,10 @@ class Config extends AbstractHelper
      */
     public function getAdminTheme(): string
     {
-        return (string)$this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_ADMINHTML_THEME);
+        return (string)$this->scopeConfig->getValue(
+            self::TURNSTILE_CONFIG_PATH_ADMINHTML_THEME,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     /**
@@ -94,7 +113,10 @@ class Config extends AbstractHelper
      */
     public function getFrontendSize(): string
     {
-        return (string)$this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_FRONTEND_SIZE);
+        return (string)$this->scopeConfig->getValue(
+            self::TURNSTILE_CONFIG_PATH_FRONTEND_SIZE,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     /**
@@ -104,7 +126,10 @@ class Config extends AbstractHelper
      */
     public function getAdminSize(): string
     {
-        return (string)$this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_ADMINHTML_SIZE);
+        return (string)$this->scopeConfig->getValue(
+            self::TURNSTILE_CONFIG_PATH_ADMINHTML_SIZE,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     /**
@@ -114,7 +139,10 @@ class Config extends AbstractHelper
      */
     public function getFrontendForms(): array
     {
-        $forms = $this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_FRONTEND_FORMS);
+        $forms = $this->scopeConfig->getValue(
+            self::TURNSTILE_CONFIG_PATH_FRONTEND_FORMS,
+            ScopeInterface::SCOPE_STORE
+        );
 
         return $forms ? array_filter(explode(',', $forms)) : [];
     }
@@ -126,7 +154,10 @@ class Config extends AbstractHelper
      */
     public function getAdminForms(): array
     {
-        $forms = $this->scopeConfig->getValue(self::TURNSTILE_CONFIG_PATH_ADMINHTML_FORMS);
+        $forms = $this->scopeConfig->getValue(
+            self::TURNSTILE_CONFIG_PATH_ADMINHTML_FORMS,
+            ScopeInterface::SCOPE_STORE
+        );
 
         return $forms ? array_filter(explode(',', $forms)) : [];
     }

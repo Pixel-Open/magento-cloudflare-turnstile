@@ -1,3 +1,7 @@
+## 100.2.4
+
+- Fix configuration scope ([@Igmar95](https://github.com/Igmar95))
+
 ## 100.2.3
 
 - Avoid PHP error when module action class does not exist
