@@ -1,3 +1,7 @@
+## 100.2.5
+
+- Fix redirect URI error when no referer
+
 ## 100.2.4
 
 - Fix configuration scope ([@Igmar95](https://github.com/Igmar95))
