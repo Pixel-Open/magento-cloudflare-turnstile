@@ -1,3 +1,7 @@
+## 100.2.6
+
+- Widget added during checkout login when email exists ([14](https://github.com/Pixel-Open/magento-cloudflare-turnstile/issues/14))
+
 ## 100.2.5
 
 - Fix redirect URI error when no referer
