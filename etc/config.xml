@@ -18,7 +18,7 @@
             <adminhtml>
                 <enabled>0</enabled>
                 <theme>light</theme>
-                <size>compact</size>
+                <size>flexible</size>
             </adminhtml>
         </pixel_open_cloudflare_turnstile>
     </default>

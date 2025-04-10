@@ -69,14 +69,14 @@ composer require pixelopen/magento-cloudflare-turnstile
 
 - **Enabled**: enable Cloudflare Turnstile
 - **Theme**: the Turnstile theme (auto, light or dark)
-- **Size**: the widget size (compact or normal)
+- **Size**: the widget size (compact, normal, or flexible)
 - **Forms to validate**: the frontend forms where a Turnstile validation is required
 
 **Admin Panel**
 
 - **Enabled**: enable Cloudflare Turnstile
 - **Theme**: the Turnstile theme (auto, light or dark)
-- **Size**: the widget size (compact or normal)
+- **Size**: the widget size (compact, normal, or flexible)
 - **Forms to validate**: the admin forms where a Turnstile validation is required
 
 ### Override default config
@@ -116,7 +116,7 @@ bin/magento config:set pixel_open_cloudflare_turnstile/settings/sitekey {sitekey
 ```shell
 bin/magento config:set pixel_open_cloudflare_turnstile/frontend/enabled {1|0}
 bin/magento config:set pixel_open_cloudflare_turnstile/frontend/theme {auto|light|dark}
-bin/magento config:set pixel_open_cloudflare_turnstile/frontend/size {normal|compact}
+bin/magento config:set pixel_open_cloudflare_turnstile/frontend/size {normal|compact|flexible}
 bin/magento config:set pixel_open_cloudflare_turnstile/frontend/forms contact,register,login,login-ajax,password
 ```
 
@@ -125,7 +125,7 @@ bin/magento config:set pixel_open_cloudflare_turnstile/frontend/forms contact,re
 ```shell
 bin/magento config:set pixel_open_cloudflare_turnstile/adminhtml/enabled {1|0}
 bin/magento config:set pixel_open_cloudflare_turnstile/adminhtml/theme {auto|light|dark}
-bin/magento config:set pixel_open_cloudflare_turnstile/adminhtml/size {normal|compact}
+bin/magento config:set pixel_open_cloudflare_turnstile/adminhtml/size {normal|compact|flexible}
 bin/magento config:set pixel_open_cloudflare_turnstile/adminhtml/forms login,password
 ```
 

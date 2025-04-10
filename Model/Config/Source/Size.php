@@ -16,6 +16,7 @@ class Size implements OptionSourceInterface
 {
     public const SIZE_NORMAL = 'normal';
     public const SIZE_COMPACT = 'compact';
+    public const SIZE_FLEXIBLE = 'flexible';
 
     /**
      * Get options as array
@@ -43,6 +44,6 @@ class Size implements OptionSourceInterface
      */
     public function toArray(): array
     {
-        return [self::SIZE_NORMAL, self::SIZE_COMPACT];
+        return [self::SIZE_NORMAL, self::SIZE_COMPACT, self::SIZE_FLEXIBLE];
     }
 }
