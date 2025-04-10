@@ -1,3 +1,7 @@
+## 100.2.7
+
+- Added "flexible" size option ([@MikeWilkie](https://github.com/MikeWilkie))
+
 ## 100.2.6
 
 - Widget added during checkout login when email exists ([14](https://github.com/Pixel-Open/magento-cloudflare-turnstile/issues/14))
