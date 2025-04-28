@@ -63,8 +63,12 @@ define(
              * Render widget only when modal is open
              */
             loginAjax: function () {
-                $(this.authentication).on('transitionend', function () {
-                    this.render();
+                $(this.authentication).on('transitionend', function (event) {
+                    const target = $(event.target);
+                    target.find('.cf-turnstile').empty();
+                    if (target.hasClass('_show')) {
+                        this.render();
+                    }
                 }.bind(this));
             },
 
