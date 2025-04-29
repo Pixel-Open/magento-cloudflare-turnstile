@@ -43,6 +43,13 @@ define(
             beforeRender: function () {
                 if (this.action === 'login-ajax') {
                     this.loginAjax();
+
+                    const cart = customerData.get('cart');
+                    cart.subscribe(function (cartData) {
+                        if (cartData.isGuestCheckoutAllowed === false) {
+                            this.loginAjax();
+                        }
+                    }, this);
                 }
 
                 this._super();
@@ -63,7 +70,7 @@ define(
              * Render widget only when modal is open
              */
             loginAjax: function () {
-                $(this.authentication).on('transitionend', function (event) {
+                $(this.authentication).off('transitionend').on('transitionend', function (event) {
                     const target = $(event.target);
                     target.find('.cf-turnstile').empty();
                     if (target.hasClass('_show')) {
