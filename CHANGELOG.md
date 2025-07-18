@@ -1,3 +1,8 @@
+## 100.2.8
+
+- Fix multiple widget renderer on ajax login
+- Fix ajax login event when cart is not subscribed
+
 ## 100.2.7
 
 - Added "flexible" size option ([@MikeWilkie](https://github.com/MikeWilkie))
