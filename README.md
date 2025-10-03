@@ -18,6 +18,7 @@
 - Reset password
 - Review
 - Send product to friend
+- Newsletter
 
 ### Admin Forms
 
