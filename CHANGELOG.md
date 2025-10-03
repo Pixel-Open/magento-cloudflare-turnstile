@@ -1,6 +1,6 @@
 ## 100.3.0
 
-- Allow adding a captcha to the native newsletter subscription block
+- Allow adding a captcha to the native newsletter subscription block ([2](https://github.com/Pixel-Open/magento-cloudflare-turnstile/issues/2))
 
 ## 100.2.8
 
