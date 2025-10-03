@@ -1,0 +1,9 @@
+<?php /** @var \PixelOpen\CloudflareTurnstile\Block\Newsletter $block */ ?>
+<?php /** @var \Magento\Framework\Escaper $escaper */ ?>
+<?php if ($block->isEnabled()): ?>
+<script>
+    require(['jquery', 'domReady!'], function ($) {
+        $('#<?= $escaper->escapeJs($block->getId()) ?>').appendTo('#newsletter-validate-detail');
+    });
+</script>
+<?php endif; ?>

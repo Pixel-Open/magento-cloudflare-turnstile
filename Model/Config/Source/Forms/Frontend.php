@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2023 Pixel Développement
+ * Copyright (C) 2025 Pixel Développement
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,6 +21,7 @@ class Frontend extends Forms
     public const FORM_PASSWORD = 'password';
     public const FORM_REVIEW = 'review';
     public const FORM_SEND_FRIEND = 'send-friend';
+    public const FORM_NEWSLETTER = 'newsletter';
 
     public function toArray(): array
     {
@@ -31,7 +32,8 @@ class Frontend extends Forms
             self::FORM_LOGIN_AJAX,
             self::FORM_PASSWORD,
             self::FORM_REVIEW,
-            self::FORM_SEND_FRIEND
+            self::FORM_SEND_FRIEND,
+            self::FORM_NEWSLETTER,
         ];
     }
 }

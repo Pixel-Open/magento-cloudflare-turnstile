@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright (C) 2023 Pixel Développement
+ * Copyright (C) 2025 Pixel Développement
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,6 +20,7 @@
                     <item name="login-ajax" xsi:type="string">Magento\Customer\Controller\Ajax\Login</item>
                     <item name="review" xsi:type="string">Magento\Review\Controller\Product\Post</item>
                     <item name="send-friend" xsi:type="string">Magento\SendFriend\Controller\Product\Sendmail</item>
+                    <item name="newsletter" xsi:type="string">Magento\Newsletter\Controller\Subscriber\NewAction</item>
                 </item>
             </argument>
         </arguments>

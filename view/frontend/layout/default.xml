@@ -34,5 +34,14 @@
                 </argument>
             </arguments>
         </referenceBlock>
+        <referenceContainer name="footer">
+            <block name="pixel.open.cloudflare.turnstile.newsletter" class="PixelOpen\CloudflareTurnstile\Block\Turnstile" ifconfig="pixel_open_cloudflare_turnstile/frontend/enabled">
+                <action method="setAction">
+                    <argument name="action" xsi:type="string">newsletter</argument>
+                </action>
+            </block>
+            <!-- The turnstile element need to be moved in the newsletter block in JS. There are no other possibilities. You can remove this block if needed. -->
+            <block name="pixel.open.cloudflare.turnstile.newsletter.append.to" class="PixelOpen\CloudflareTurnstile\Block\Newsletter" template="PixelOpen_CloudflareTurnstile::newsletter.phtml" ifconfig="pixel_open_cloudflare_turnstile/frontend/enabled" />
+        </referenceContainer>
     </body>
 </page>
