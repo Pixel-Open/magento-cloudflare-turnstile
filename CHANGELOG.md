@@ -1,3 +1,7 @@
+## 100.3.0
+
+- Allow adding a captcha to the native newsletter subscription block
+
 ## 100.2.8
 
 - Fix multiple widget renderer on ajax login
