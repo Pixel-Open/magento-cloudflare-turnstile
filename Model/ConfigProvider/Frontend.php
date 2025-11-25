@@ -35,9 +35,10 @@ class Frontend implements ConfigProviderInterface
             'config' => [
                 'enabled' => $this->config->isEnabledOnFront(),
                 'sitekey' => $this->config->getSiteKey(),
-                'theme'   => $this->config->getFrontendTheme(),
-                'size'    => $this->config->getFrontendSize(),
-                'forms'   => $this->config->getFrontendForms(),
+                'theme'          => $this->config->getFrontendTheme(),
+                'size'           => $this->config->getFrontendSize(),
+                'forms'          => $this->config->getFrontendForms(),
+                'renderingMode'  => $this->config->getFrontendRenderingMode(),
             ]
         ];
     }

@@ -14,6 +14,7 @@
                 <enabled>0</enabled>
                 <theme>light</theme>
                 <size>normal</size>
+                <rendering_mode>knockout</rendering_mode>
             </frontend>
             <adminhtml>
                 <enabled>0</enabled>

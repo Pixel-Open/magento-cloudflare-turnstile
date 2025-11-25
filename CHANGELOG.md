@@ -1,3 +1,10 @@
+## 100.4.0
+
+- Added storefront setting to choose the widget rendering mode (Knockout vs Hyvä/Alpine fallback)
+- Ensured only one renderer executes at a time to prevent Cloudflare "sitekey object" errors
+- Added dedicated fallback container class (`cf-turnstile-manual`) so Turnstile auto-render does not attach to Hyvä widgets
+- Improved frontend/admin CSS and JS to respect the selected rendering mode
+
 ## 100.3.0
 
 - Allow adding a captcha to the native newsletter subscription block ([2](https://github.com/Pixel-Open/magento-cloudflare-turnstile/issues/2))

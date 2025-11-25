@@ -12,6 +12,7 @@ namespace PixelOpen\CloudflareTurnstile\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Store\Model\ScopeInterface;
+use PixelOpen\CloudflareTurnstile\Model\Config\Source\RenderingMode;
 
 class Config extends AbstractHelper
 {
@@ -22,6 +23,7 @@ class Config extends AbstractHelper
     public const TURNSTILE_CONFIG_PATH_FRONTEND_THEME = 'pixel_open_cloudflare_turnstile/frontend/theme';
     public const TURNSTILE_CONFIG_PATH_FRONTEND_SIZE = 'pixel_open_cloudflare_turnstile/frontend/size';
     public const TURNSTILE_CONFIG_PATH_FRONTEND_FORMS = 'pixel_open_cloudflare_turnstile/frontend/forms';
+    public const TURNSTILE_CONFIG_PATH_FRONTEND_RENDERING_MODE = 'pixel_open_cloudflare_turnstile/frontend/rendering_mode';
 
     public const TURNSTILE_CONFIG_PATH_ADMINHTML_ENABLED = 'pixel_open_cloudflare_turnstile/adminhtml/enabled';
     public const TURNSTILE_CONFIG_PATH_ADMINHTML_THEME = 'pixel_open_cloudflare_turnstile/adminhtml/theme';
@@ -117,6 +119,21 @@ class Config extends AbstractHelper
             self::TURNSTILE_CONFIG_PATH_FRONTEND_SIZE,
             ScopeInterface::SCOPE_STORE
         );
+    }
+
+    /**
+     * Retrieve frontend rendering mode
+     *
+     * @return string
+     */
+    public function getFrontendRenderingMode(): string
+    {
+        $mode = $this->scopeConfig->getValue(
+            self::TURNSTILE_CONFIG_PATH_FRONTEND_RENDERING_MODE,
+            ScopeInterface::SCOPE_STORE
+        );
+
+        return $mode ?: RenderingMode::MODE_KNOCKOUT;
     }
 
     /**

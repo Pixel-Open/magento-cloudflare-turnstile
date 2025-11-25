@@ -1,22 +1,68 @@
-<?php /** @var \PixelOpen\CloudflareTurnstile\Block\Turnstile $block */ ?>
-<?php /** @var \Magento\Framework\Escaper $escaper */ ?>
-<div id="<?= $escaper->escapeHtmlAttr($block->getId()) ?>" class="cloudflare-turnstile" data-bind="scope:'cloudflare-turnstile-<?= $escaper->escapeHtmlAttr($block->getId()) ?>'">
-    <!-- ko template: getTemplate() --><!-- /ko -->
+<?php
+/**
+ * Copyright (C) 2023 Pixel Développement
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/** @var \PixelOpen\CloudflareTurnstile\Block\Turnstile $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+// Get configuration values from block
+$isEnabled = $block->isEnabled();
+$sitekey = $block->getSiteKey();
+$action = $block->getAction();
+$isFormEnabled = $block->isFormEnabled();
+$theme = $block->getThemeFromConfig();
+$size = $block->getSizeFromConfig();
+$elementId = $block->getId();
+$renderingMode = $block->getRenderingMode();
+$isKnockout = $block->isKnockoutRendering();
+$isFallback = $block->isFallbackRendering();
+
+// Early return if not enabled
+if (!$isEnabled || !$isFormEnabled || !$sitekey) {
+    return;
+}
+?>
+
+<div id="<?= $escaper->escapeHtmlAttr($elementId) ?>" class="cloudflare-turnstile"
+     data-action="<?= $escaper->escapeHtmlAttr($action) ?>"
+     data-sitekey="<?= $escaper->escapeHtmlAttr($sitekey) ?>"
+     data-theme="<?= $escaper->escapeHtmlAttr($theme) ?>"
+     data-size="<?= $escaper->escapeHtmlAttr($size) ?>"
+     data-render-mode="<?= $escaper->escapeHtmlAttr($renderingMode) ?>"
+     <?php if ($isKnockout): ?>
+     data-bind="scope:'cloudflare-turnstile-<?= $escaper->escapeHtmlAttr($elementId) ?>'"
+     <?php endif; ?>
+>
+    <?php if ($isKnockout): ?>
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <?php endif; ?>
+    <?php if ($isFallback): ?>
+        <!-- Fallback container for themes without Knockout.js (e.g., Hyvä Theme) -->
+        <div id="cf-turnstile-fallback-<?= $escaper->escapeHtmlAttr($elementId) ?>" class="cf-turnstile-manual" style="display: none;"></div>
+    <?php endif; ?>
 </div>
-<script type="text/x-magento-init">
-{
-    "#<?= $escaper->escapeJs($block->getId()) ?>": {
-        "Magento_Ui/js/core/app": {
-            "components": {
-                "cloudflare-turnstile-<?= $escaper->escapeJs($block->getId()) ?>": {
-                    "component": "PixelOpen_CloudflareTurnstile/js/view/turnstile",
-                    "action": "<?= $escaper->escapeJs($block->getAction()) ?>",
-                    "size": "<?= $escaper->escapeJs($block->getSize()) ?>",
-                    "theme": "<?= $escaper->escapeJs($block->getTheme()) ?>",
-                    "configSource": "turnstileConfig"
+
+<?php if ($isKnockout): ?>
+    <script type="text/x-magento-init">
+    {
+        "#<?= $escaper->escapeJs($elementId) ?>": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "cloudflare-turnstile-<?= $escaper->escapeJs($elementId) ?>": {
+                        "component": "PixelOpen_CloudflareTurnstile/js/view/turnstile",
+                        "action": "<?= $escaper->escapeJs($action) ?>",
+                        "size": "<?= $escaper->escapeJs($size) ?>",
+                        "theme": "<?= $escaper->escapeJs($theme) ?>",
+                        "configSource": "turnstileConfig"
+                    }
                 }
             }
         }
     }
-}
-</script>
+    </script>
+<?php endif; ?>
+

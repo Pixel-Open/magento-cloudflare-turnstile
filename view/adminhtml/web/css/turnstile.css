@@ -5,4 +5,14 @@
 .cloudflare-turnstile {
     font-weight: bold;
     color: #c00;
+    margin-top: 1rem;
+}
+
+.cf-turnstile-manual {
+    margin-top: 0;
+    min-height: 65px;
+}
+
+.cloudflare-turnstile .cf-turnstile {
+    margin-top: 0;
 }

@@ -10,6 +10,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <css src="PixelOpen_CloudflareTurnstile::css/turnstile.css"/>
+        <script src="PixelOpen_CloudflareTurnstile::js/fallback.js"/>
     </head>
     <body>
         <referenceContainer name="before.body.end">

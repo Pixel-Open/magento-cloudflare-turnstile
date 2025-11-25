@@ -30,6 +30,14 @@
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="rendering_mode" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Rendering mode</label>
+                    <source_model>PixelOpen\CloudflareTurnstile\Model\Config\Source\RenderingMode</source_model>
+                    <comment><![CDATA[Select how the widget is rendered. Use <strong>Knockout</strong> for Luma/Blank based themes, or the <strong>Hyvä / Alpine fallback</strong> when Knockout is not available.]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
                 <field id="theme" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Theme</label>
                     <source_model>PixelOpen\CloudflareTurnstile\Model\Config\Source\Theme</source_model>

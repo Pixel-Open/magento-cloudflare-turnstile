@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace PixelOpen\CloudflareTurnstile\Block;
 
 use PixelOpen\CloudflareTurnstile\Helper\Config;
+use PixelOpen\CloudflareTurnstile\Model\Config\Source\RenderingMode;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\Filter\FilterManager;
@@ -84,5 +85,86 @@ class Turnstile extends Template
     public function getId(): string
     {
         return 'cloudflare-turnstile-' . $this->filter->translitUrl($this->getAction());
+    }
+
+    /**
+     * Check if Turnstile is enabled on frontend
+     *
+     * @return bool
+     */
+    public function isEnabled(): bool
+    {
+        return $this->config->isEnabledOnFront();
+    }
+
+    /**
+     * Retrieve sitekey
+     *
+     * @return string
+     */
+    public function getSiteKey(): string
+    {
+        return $this->config->getSiteKey();
+    }
+
+    /**
+     * Check if the current action/form is enabled
+     *
+     * @return bool
+     */
+    public function isFormEnabled(): bool
+    {
+        $forms = $this->config->getFrontendForms();
+        return in_array($this->getAction(), $forms);
+    }
+
+    /**
+     * Retrieve theme from config if not overridden
+     *
+     * @return string
+     */
+    public function getThemeFromConfig(): string
+    {
+        return $this->getTheme() ?: $this->config->getFrontendTheme();
+    }
+
+    /**
+     * Retrieve size from config if not overridden
+     *
+     * @return string
+     */
+    public function getSizeFromConfig(): string
+    {
+        return $this->getSize() ?: $this->config->getFrontendSize();
+    }
+
+    /**
+     * Retrieve configured rendering mode
+     *
+     * @return string
+     */
+    public function getRenderingMode(): string
+    {
+        return $this->config->getFrontendRenderingMode();
+    }
+
+    /**
+     * Use Knockout rendering (Luma/Blank themes)
+     *
+     * @return bool
+     */
+    public function isKnockoutRendering(): bool
+    {
+        return $this->getRenderingMode() === RenderingMode::MODE_KNOCKOUT;
+    }
+
+    /**
+     * Use Hyvä/Alpine fallback rendering
+     *
+     * @return bool
+     */
+    public function isFallbackRendering(): bool
+    {
+        return $this->getRenderingMode() === RenderingMode::MODE_FALLBACK;
     }
 }

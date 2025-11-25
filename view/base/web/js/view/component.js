@@ -31,7 +31,8 @@ define(
                 'sitekey': '',
                 'forms': [],
                 'size': 'normal',
-                'theme': 'auto'
+                'theme': 'auto',
+                'renderingMode': 'knockout'
             },
             action: 'default',
             size: '', // Override config value if not empty
@@ -39,6 +40,7 @@ define(
             widgetId: null,
             autoRendering: true,
             element: null,
+            renderingMode: 'knockout',
 
             /**
              * Initialize
@@ -49,6 +51,8 @@ define(
                 if (typeof window[this.configSource] !== 'undefined' && window[this.configSource].config) {
                     this.config = window[this.configSource].config;
                 }
+
+                this.renderingMode = this.config.renderingMode || 'knockout';
             },
 
             /**
@@ -68,14 +72,31 @@ define(
             load: function (element) {
                 this.element = element;
 
-                if (!this.config.sitekey) {
-                    this.element.innerText = $.mage.__('Unable to secure the form. The site key is missing.');
-                } else {
+                // Extract sitekey value from observable if needed
+                const sitekey = this.getValue(this.config.sitekey);
+                
+                if (sitekey) {
                     this.beforeRender();
                     if (this.autoRendering) {
                         this.render();
                     }
+                    return;
                 }
+
+                this.element.innerText = $.mage.__('Unable to secure the form. The site key is missing.');
+            },
+
+            /**
+             * Get value from observable or return value directly
+             * 
+             * @param {*} value
+             * @returns {*}
+             */
+            getValue: function (value) {
+                if (ko?.isObservable(value)) {
+                    return ko.unwrap(value);
+                }
+                return value;
             },
 
             /**
@@ -83,12 +104,33 @@ define(
              */
             render: function () {
                 if (this.element) {
-                    const widgetId = turnstile.render(this.element, {
-                        sitekey: this.config.sitekey,
-                        theme: this.theme || this.config.theme,
-                        size: this.size || this.config.size,
-                        action: this.action
-                    });
+                    // Extract values from observables if needed
+                    let sitekey = this.getValue(this.config.sitekey);
+                    const theme = String(this.getValue(this.theme || this.config.theme) || 'auto').trim();
+                    const size = String(this.getValue(this.size || this.config.size) || 'normal').trim();
+                    const action = String(this.getValue(this.action) || 'default').trim();
+                    
+                    // Validate and convert sitekey to string
+                    if (!sitekey) {
+                        this.element.innerText = $.mage.__('Unable to secure the form. The site key is missing.');
+                        return;
+                    }
+                    
+                    sitekey = String(sitekey).trim();
+                    
+                    if (sitekey === '' || sitekey === 'null' || sitekey === 'undefined') {
+                        this.element.innerText = $.mage.__('Unable to secure the form. The site key is invalid.');
+                        return;
+                    }
+                    
+                    const renderConfig = {
+                        sitekey: sitekey,
+                        theme: theme,
+                        size: size,
+                        action: action
+                    };
+                    
+                    const widgetId = turnstile.render(this.element, renderConfig);
                     if (typeof widgetId === 'undefined') {
                         this.element.innerText = $.mage.__('Unable to secure the form');
                     } else {
