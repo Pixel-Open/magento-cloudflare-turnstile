@@ -14,6 +14,7 @@ use Exception;
 use Magento\Framework\App\ActionInterface;
 use Magento\Framework\App\Request\Http as Request;
 use Magento\Framework\App\Response\Http as Response;
+use Magento\Framework\App\Response\RedirectInterface;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Message\ManagerInterface;
@@ -28,6 +29,8 @@ abstract class Validate implements ObserverInterface
     protected ManagerInterface $messageManager;
 
     protected Response $response;
+
+    protected RedirectInterface $redirect;
 
     protected Validator $validator;
 
@@ -45,7 +48,6 @@ abstract class Validate implements ObserverInterface
 
     /**
      * @param ManagerInterface $messageManager
-     * @param Response $response
      * @param Validator $validator
      * @param Json $json
      * @param Config $config
@@ -54,7 +56,7 @@ abstract class Validate implements ObserverInterface
      */
     public function __construct(
         ManagerInterface $messageManager,
-        Response $response,
+        RedirectInterface $redirect,
         Validator $validator,
         Json $json,
         Config $config,
@@ -62,7 +64,7 @@ abstract class Validate implements ObserverInterface
         array $data = []
     ) {
         $this->messageManager = $messageManager;
-        $this->response       = $response;
+        $this->redirect       = $redirect;
         $this->validator      = $validator;
         $this->json           = $json;
         $this->config         = $config;
@@ -78,8 +80,9 @@ abstract class Validate implements ObserverInterface
      */
     public function execute(Observer $observer): void
     {
-        $this->action = $observer->getEvent()->getData('controller_action');
-        $this->request = $observer->getEvent()->getData('request');
+        $this->action   = $observer->getEvent()->getData('controller_action');
+        $this->request  = $observer->getEvent()->getData('request');
+        $this->response = $this->action->getResponse();
 
         if ($this->canValidate()) {
             try {
@@ -114,9 +117,8 @@ abstract class Validate implements ObserverInterface
     protected function error(Phrase $message): void
     {
         $this->messageManager->addErrorMessage($message);
-        $this->response->setRedirect($this->request?->getServer('HTTP_REFERER', '/') ?? '/');
+        $this->redirect->redirect($this->response, $this->redirect->getRefererUrl());
 
-        $this->response->sendResponse();
         exit();
     }
 
