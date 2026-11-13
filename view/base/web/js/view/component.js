@@ -116,8 +116,12 @@ define(
              * Reset widget
              */
             reset: function () {
-                if (this.widgetId) {
-                    turnstile.reset(this.widgetId);
+                if (this.widgetId && typeof turnstile !== 'undefined') {
+                    try {
+                        turnstile.reset(this.widgetId);
+                    } catch (e) {
+                        // The widget has been removed from the DOM
+                    }
                 }
             }
         });

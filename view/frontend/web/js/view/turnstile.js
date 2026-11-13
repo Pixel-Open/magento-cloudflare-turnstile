@@ -10,18 +10,32 @@ define(
     [
         'jquery',
         'PixelOpen_CloudflareTurnstile/js/view/component',
-        'Magento_Customer/js/customer-data'
+        'Magento_Customer/js/customer-data',
+        'Magento_Customer/js/action/login'
     ],
     function (
         $,
         Component,
-        customerData
+        customerData,
+        loginAction
     ) {
         'use strict';
 
         return Component.extend({
             customer: customerData.get('customer'),
             authentication: '.authentication-dropdown, .popup-authentication',
+
+            /**
+             * Initialize
+             */
+            initialize: function () {
+                this._super();
+
+                if (this.action === 'login-ajax') {
+                    // A token can only be validated once: reset the widget after each login attempt
+                    loginAction.registerLoginCallback(this.reset.bind(this));
+                }
+            },
 
             /**
              * Can show widget
@@ -41,7 +55,7 @@ define(
              * Before Render
              */
             beforeRender: function () {
-                if (this.action === 'login-ajax') {
+                if (this.action === 'login-ajax' && !this.autoRendering) {
                     this.loginAjax();
 
                     const cart = customerData.get('cart');
@@ -50,17 +64,6 @@ define(
                             this.loginAjax();
                         }
                     }, this);
-                }
-
-                this._super();
-            },
-
-            /**
-             * After render widget
-             */
-            afterRender: function () {
-                if (this.action === 'login-ajax') {
-                    this.loginAjaxComplete();
                 }
 
                 this._super();
@@ -77,20 +80,6 @@ define(
                         this.render();
                     }
                 }.bind(this));
-            },
-
-            /**
-             * Reset turnstile when Ajax request is complete with error
-             */
-            loginAjaxComplete: function () {
-                if (this.widgetId) {
-                    $(document).on('ajaxComplete', function (event, xhr) {
-                        const result = xhr.responseJSON;
-                        if (result.hasOwnProperty('errors') && result.errors) {
-                            this.reset();
-                        }
-                    }.bind(this));
-                }
             }
         });
     }

@@ -37,7 +37,7 @@
                                                                 <item name="additional-login-form-fields" xsi:type="array">
                                                                     <item name="children" xsi:type="array">
                                                                         <item name="captcha" xsi:type="array">
-                                                                            <item name="component" xsi:type="string">PixelOpen_CloudflareTurnstile/js/view/component</item>
+                                                                            <item name="component" xsi:type="string">PixelOpen_CloudflareTurnstile/js/view/turnstile</item>
                                                                             <item name="displayArea" xsi:type="string">additional-login-form-fields</item>
                                                                             <item name="action" xsi:type="string">login-ajax</item>
                                                                             <item name="configSource" xsi:type="string">turnstileConfig</item>
