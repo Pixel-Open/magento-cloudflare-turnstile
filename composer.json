@@ -3,11 +3,16 @@
   "description": "Protect your store from spam messages and spam user accounts with Cloudflare Turnstile",
   "require": {
     "php": "^8",
+    "magento/framework": "*",
+    "magento/module-authorization": "*",
     "magento/module-config": "*",
-    "magento/framework": "*"
+    "magento/module-webapi": "*"
+  },
+  "suggest": {
+    "magento/module-checkout": "Required to protect the guest checkout (place order)"
   },
   "type": "magento2-module",
-  "version": "100.3.1",
+  "version": "100.4.0",
   "autoload": {
     "files": [
       "registration.php"

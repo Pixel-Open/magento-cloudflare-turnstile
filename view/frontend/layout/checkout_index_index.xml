@@ -51,6 +51,36 @@
                                                 </item>
                                             </item>
                                         </item>
+                                        <item name="billing-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="payment" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="payments-list" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="before-place-order" xsi:type="array">
+                                                                    <item name="children" xsi:type="array">
+                                                                        <item name="cloudflare-turnstile" xsi:type="array">
+                                                                            <item name="component" xsi:type="string">PixelOpen_CloudflareTurnstile/js/view/checkout</item>
+                                                                            <item name="displayArea" xsi:type="string">before-place-order</item>
+                                                                            <item name="action" xsi:type="string">checkout</item>
+                                                                            <item name="configSource" xsi:type="string">turnstileConfig</item>
+                                                                            <item name="sortOrder" xsi:type="string">200</item>
+                                                                            <!-- Payment methods not placing the order with the Web API: <item name="method_code" xsi:type="boolean">true</item> -->
+                                                                            <item name="skipPayments" xsi:type="array">
+                                                                                <!-- PayPal Express Checkout: the order is placed by the PayPal controller on return -->
+                                                                                <item name="paypal_express" xsi:type="boolean">true</item>
+                                                                                <item name="payflow_express" xsi:type="boolean">true</item>
+                                                                                <item name="payflow_express_bml" xsi:type="boolean">true</item>
+                                                                            </item>
+                                                                        </item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
                                     </item>
                                 </item>
                             </item>

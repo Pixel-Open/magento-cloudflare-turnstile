@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright (C) 2026 Pixel Développement
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="PixelOpen\CloudflareTurnstile\Model\Webapi\Endpoints">
+        <arguments>
+            <!-- "Service\Class::method" => frontend form code -->
+            <argument name="endpoints" xsi:type="array">
+                <item name="Magento\Checkout\Api\GuestPaymentInformationManagementInterface::savePaymentInformationAndPlaceOrder" xsi:type="string">checkout</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

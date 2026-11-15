@@ -22,3 +22,4 @@
 "the response parameter has already been validated before.","le paramètre de réponse a déjà été validé."
 "an internal error happened while validating the response.","une erreur interne s'est produite lors de la validation de la réponse."
 "unknown error.","erreur inconnue."
+"Operation is available only to authenticated clients","Opération disponible uniquement pour les clients authentifiés"

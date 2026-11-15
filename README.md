@@ -19,6 +19,7 @@
 - Review
 - Send product to friend
 - Newsletter
+- Guest checkout (place order)
 
 ### Admin Forms
 
@@ -103,6 +104,71 @@ You can specifically change theme and size values for a form in the layout:
 </page>
 ```
 
+#### Skip payment methods
+
+Add a payment method with `true`, or remove a default one with `false`:
+
+```xml
+<?xml version="1.0"?>
+<!-- layout/checkout_index_index.xml -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="billing-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="payment" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="payments-list" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="before-place-order" xsi:type="array">
+                                                                    <item name="children" xsi:type="array">
+                                                                        <item name="cloudflare-turnstile" xsi:type="array">
+                                                                            <item name="skipPayments" xsi:type="array">
+                                                                                <item name="vendor_express" xsi:type="boolean">true</item>
+                                                                                <item name="paypal_express" xsi:type="boolean">false</item>
+                                                                            </item>
+                                                                        </item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
+```
+
+#### Protect other Web API endpoints
+
+Other service methods can be protected with a frontend form code, in `etc/di.xml`:
+
+```xml
+<type name="PixelOpen\CloudflareTurnstile\Model\Webapi\Endpoints">
+    <arguments>
+        <argument name="endpoints" xsi:type="array">
+            <item name="Vendor\Module\Api\ServiceInterface::method" xsi:type="string">checkout</item>
+        </argument>
+    </arguments>
+</type>
+```
+
 ### Command line configuration
 
 #### Settings
@@ -118,7 +184,7 @@ bin/magento config:set pixel_open_cloudflare_turnstile/settings/sitekey {sitekey
 bin/magento config:set pixel_open_cloudflare_turnstile/frontend/enabled {1|0}
 bin/magento config:set pixel_open_cloudflare_turnstile/frontend/theme {auto|light|dark}
 bin/magento config:set pixel_open_cloudflare_turnstile/frontend/size {normal|compact|flexible}
-bin/magento config:set pixel_open_cloudflare_turnstile/frontend/forms contact,register,login,login-ajax,password
+bin/magento config:set pixel_open_cloudflare_turnstile/frontend/forms contact,register,login,login-ajax,password,review,send-friend,newsletter,checkout
 ```
 
 #### Admin

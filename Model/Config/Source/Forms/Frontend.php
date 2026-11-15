@@ -22,6 +22,7 @@ class Frontend extends Forms
     public const FORM_REVIEW = 'review';
     public const FORM_SEND_FRIEND = 'send-friend';
     public const FORM_NEWSLETTER = 'newsletter';
+    public const FORM_CHECKOUT = 'checkout';
 
     public function toArray(): array
     {
@@ -34,6 +35,7 @@ class Frontend extends Forms
             self::FORM_REVIEW,
             self::FORM_SEND_FRIEND,
             self::FORM_NEWSLETTER,
+            self::FORM_CHECKOUT,
         ];
     }
 }
